@@ -1,0 +1,475 @@
+
+
+<!DOCTYPE html>
+<html lang="en" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" href="https://t13mk.github.io/img/favicon.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="7bmk">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="因为代码搓得太烂了，所以也记录一下遇到的问题吧。。大佬绕过 上鸡要求：搓个链表，然后实现增删改查、冒泡排序、约瑟夫问题、一元多项式计算 代码大杂烩。。增删改查1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253545556575859606162636465">
+<meta property="og:type" content="article">
+<meta property="og:title" content="数据结构第一次上鸡">
+<meta property="og:url" content="http://example.com/2021/09/26/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-%E9%93%BE%E8%A1%A8%E7%9A%84%E4%B8%8A%E9%B8%A1%E6%8A%A5%E5%91%8A/index.html">
+<meta property="og:site_name">
+<meta property="og:description" content="因为代码搓得太烂了，所以也记录一下遇到的问题吧。。大佬绕过 上鸡要求：搓个链表，然后实现增删改查、冒泡排序、约瑟夫问题、一元多项式计算 代码大杂烩。。增删改查1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253545556575859606162636465">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2021-09-25T17:16:14.000Z">
+<meta property="article:modified_time" content="2021-12-28T00:40:31.246Z">
+<meta property="article:author" content="7bmk">
+<meta property="article:tag" content="寄科">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
+  <title>数据结构第一次上鸡 - </title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4/github-markdown.min.css" />
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hint.css@2/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.css" />
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.8.14","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 6.0.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>7bmk</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                Home
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                About
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                友链
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="数据结构第一次上鸡">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2021-09-26 01:16" pubdate>
+        September 26, 2021 am
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      8.2k 字
+    </span>
+  
+
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      69 分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">数据结构第一次上鸡</h1>
+            
+            <div class="markdown-body">
+              <p>因为代码搓得太烂了，所以也记录一下遇到的问题吧。。大佬绕过</p>
+<p>上鸡要求：搓个链表，然后实现增删改查、冒泡排序、约瑟夫问题、一元多项式计算</p>
+<h2 id="代码大杂烩。。"><a href="#代码大杂烩。。" class="headerlink" title="代码大杂烩。。"></a>代码大杂烩。。</h2><h3 id="增删改查"><a href="#增删改查" class="headerlink" title="增删改查"></a>增删改查</h3><figure class="highlight c"><table><tr><td class="gutter"><div class="code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br></pre></div></td><td class="code"><pre><code class="hljs c"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;stdio.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;malloc.h&gt;</span></span><br><span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">Node</span>&#123;</span><br>	<span class="hljs-keyword">int</span> data;<br>	<span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">Node</span> *<span class="hljs-title">next</span>=</span><span class="hljs-literal">NULL</span>;<br>&#125;;<br><br><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">Init</span><span class="hljs-params">(struct Node *&amp;L,<span class="hljs-keyword">int</span> x[],<span class="hljs-keyword">int</span> len)</span></span>&#123;<br>	<span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">Node</span>* <span class="hljs-title">p</span>=</span>((struct Node*)(<span class="hljs-built_in">malloc</span>(<span class="hljs-keyword">sizeof</span>(struct Node))));<br>	<span class="hljs-keyword">int</span> i=<span class="hljs-number">0</span>;<br>	L=p;<br>	<span class="hljs-keyword">for</span>(i = <span class="hljs-number">0</span>;i&lt;len;i++)&#123;<br>		p-&gt;data=x[i];<br>		p-&gt;next=((struct Node*)(<span class="hljs-built_in">malloc</span>(<span class="hljs-keyword">sizeof</span>(struct Node))));<br>		p=p-&gt;next;<br>&#125;<br>	p-&gt;next=<span class="hljs-literal">NULL</span>;<br>	<span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;初始化成功！\n&quot;</span>);<br>	<span class="hljs-keyword">return</span>;<br>&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">Insert</span><span class="hljs-params">(struct Node *&amp;L,<span class="hljs-keyword">int</span> num,<span class="hljs-keyword">int</span> d)</span></span>&#123;<br>	<span class="hljs-keyword">int</span> i=<span class="hljs-number">0</span>;<br>	<span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">Node</span> *<span class="hljs-title">a</span>=</span>((struct Node*)(<span class="hljs-built_in">malloc</span>(<span class="hljs-keyword">sizeof</span>(struct Node))));<br>	<span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">Node</span> *<span class="hljs-title">p</span>=</span>L;<br>	<br>	<span class="hljs-keyword">while</span>(i&lt;num<span class="hljs-number">-1</span>)&#123;<br>		p=p-&gt;next;<br>		i++;				<br>	&#125;<br>	a-&gt;next=p-&gt;next;<br>	p-&gt;next=a;<br>	a-&gt;data=d;<br>	<span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;插入成功！\n&quot;</span>);<br>	<span class="hljs-keyword">return</span>;<br>&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">Delete</span><span class="hljs-params">(struct Node *&amp;L,<span class="hljs-keyword">int</span> num)</span></span>&#123;<br>	<span class="hljs-keyword">int</span> i=<span class="hljs-number">0</span>;<br>	Node *p=L;<br>	<span class="hljs-keyword">if</span>(num==<span class="hljs-number">0</span>)&#123;<br>		L=L-&gt;next;<br>		<span class="hljs-keyword">return</span>;<br>	&#125;<br>	<span class="hljs-keyword">while</span>(i&lt;num<span class="hljs-number">-1</span>)&#123;<br>		p=p-&gt;next;<br>		i++;<br>	&#125;<br>	p-&gt;next=(p-&gt;next)-&gt;next;<br>	<span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;删除成功！\n&quot;</span>);<br>	<span class="hljs-keyword">return</span>;<br>&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">Print</span><span class="hljs-params">(struct Node *L)</span></span>&#123;<br>	<span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">Node</span>* <span class="hljs-title">trans</span>=</span>L;<br>	<span class="hljs-keyword">if</span>(trans-&gt;next==<span class="hljs-literal">NULL</span>)&#123;<br>		<span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;empty list!\n&quot;</span>);<br>		<span class="hljs-keyword">return</span>;<br>	&#125;<br>	<span class="hljs-keyword">while</span>(trans!=<span class="hljs-literal">NULL</span>)&#123;<br>		<span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%d\n&quot;</span>,trans-&gt;data);<br>		trans=trans-&gt;next;<br>		<span class="hljs-keyword">if</span>(trans-&gt;next==<span class="hljs-literal">NULL</span>)<br>			<span class="hljs-keyword">break</span>;<br>	&#125;<br><br>	<span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;显示完毕\n&quot;</span>); <br>	<span class="hljs-keyword">return</span>;<br>&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span>&#123;<br>	<span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">Node</span> *<span class="hljs-title">L</span>;</span><br>	<span class="hljs-keyword">int</span> num=<span class="hljs-number">5</span>,data=<span class="hljs-number">12</span>;<br>	<span class="hljs-keyword">int</span> x[]=&#123;<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">3</span>,<span class="hljs-number">4</span>,<span class="hljs-number">5</span>,<span class="hljs-number">0</span>&#125;; <br>	<span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;初始化：\n&quot;</span>);<br>	Init(L,x,<span class="hljs-number">5</span>);<br>	Print(L);<br>	<span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;向下标为2处插入元素12：\n&quot;</span>);<br>	Insert(L,<span class="hljs-number">2</span>,data);<br>	Print(L);<br>	<span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;依次删除元素：\n&quot;</span>);<br>	<span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i=<span class="hljs-number">-1</span>;i&lt;<span class="hljs-number">8</span>;i++)&#123;<br>		Delete(L,<span class="hljs-number">0</span>);<br>		Print(L);<br>	&#125;	<br>&#125;<br></code></pre></td></tr></table></figure>
+<h3 id="约瑟夫问题-损版"><a href="#约瑟夫问题-损版" class="headerlink" title="约瑟夫问题(损版)"></a>约瑟夫问题(损版)</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br></pre></td><td class="code"><pre><code class="hljs code">#include&lt;stdio.h&gt;<br>#include&lt;malloc.h&gt;<br>struct Node&#123;<br>	int data;<br>	struct Node *next=NULL;<br>&#125;;<br>void Init(struct Node *&amp;L,int x[],int len)&#123;<br>	struct Node*p=((struct Node*)(malloc(sizeof(struct Node))));<br>	int i=0;<br>	L=p;<br>	for(i = 0;i&lt;len;i++)&#123;<br>		p-&gt;data=x[i];<br>		p-&gt;next=((struct Node*)(malloc(sizeof(struct Node))));<br>		p=p-&gt;next;<br>&#125;<br>	p-&gt;next=NULL; <br>	printf(&quot;Fini5h3d\n&quot;);<br>	return;<br>&#125;<br><br>int Length(Node *L)&#123;<br>	int i=0;<br>	<br>	while(L-&gt;next!=NULL)&#123;<br>		i++;<br>		L=L-&gt;next;<br>	&#125;<br>	return i;<br>&#125;<br><br>void Insert(struct Node *&amp;L,int num,int d)&#123;<br>	int i=0;<br>	struct Node *a=((struct Node*)(malloc(sizeof(struct Node))));<br>	struct Node *p=L;<br>	while(i&lt;num-1)&#123;<br>		p=p-&gt;next;<br>		i++;		<br>	&#125;<br>	a-&gt;next=p-&gt;next;<br>	p-&gt;next=a;<br>	a-&gt;data=d;<br>	printf(&quot;1n53rt 5ucc355!\n&quot;);<br>	return;<br>&#125;<br>void Delete(struct Node *&amp;L,int num)&#123;<br>	int i=0;<br>	Node *p=L;<br>	shit3:	if(num&lt;0)&#123;<br>		num=num+Length(*&amp;L);<br>		goto shit3;<br>	&#125;<br>	if(num&gt;=Length(*&amp;L))&#123;<br>			num=num%Length(*&amp;L);<br>	&#125;<br>	if(num==0)&#123;<br>		L=L-&gt;next;<br>		return;<br>	&#125;<br>	while(i&lt;num-1)&#123;<br>		p=p-&gt;next;<br>		i++;<br>	&#125;<br>	p-&gt;next=(p-&gt;next)-&gt;next;<br>	//printf(&quot;D3l3t3 5ucc3553d!\n&quot;);<br>	return;<br>&#125;<br>void Print(struct Node *L)&#123;<br>	struct Node* trans=L;<br>	if(trans-&gt;next==NULL)&#123;<br>		printf(&quot;empty list!\n&quot;);<br>		return;<br>	&#125;<br>	while(trans-&gt;next!=NULL)&#123;<br>		printf(&quot;%d\n&quot;,trans-&gt;data);<br>		trans=trans-&gt;next;<br>	&#125;<br>	printf(&quot;Pr1nt f1n15h3d\n&quot;);<br>	return;<br>&#125;<br>void ChangeSpace(Node *&amp;L,int a1,int a2)&#123;<br>	Node *p=L;<br>	Node *q=L;<br>	int i; 	<br>	for(i=0;i&lt;a1;i++)&#123;<br>		p=p-&gt;next;   //此时p到了下标a处	<br>	&#125;<br>	for(i=0;i&lt;a2;i++)&#123;<br>		q=q-&gt;next; <br>	&#125;<br>	i=p-&gt;data;<br>	p-&gt;data=q-&gt;data;<br>	q-&gt;data=i;	<br>	return;<br>&#125;<br><br><br>void Sorted(Node *&amp;L)&#123;<br>	int i,j,k,t;<br>	Node *p=L;<br>	int len=Length(*&amp;L);<br>	for(i=0;i&lt;len-1;i++)&#123;<br>		p=L;<br>		for(j=0;j&lt;len-1;j++)&#123;<br>			if(p-&gt;data&lt;p-&gt;next-&gt;data)&#123;<br>				t=p-&gt;data;<br>				p-&gt;data=p-&gt;next-&gt;data;<br>				p-&gt;next-&gt;data=t;				 <br>			&#125;<br>			<br>			p=p-&gt;next;<br>		&#125;<br>	&#125;<br>	printf(&quot;fini5h3d\n&quot;);						<br>	return;	<br>&#125;<br><br>int GetItem(Node *L,int x)&#123;<br>	int i;<br>	//printf(&quot;Get:Length=%d,x=%d\n&quot;,Length(*&amp;L),x);<br>shit1:	if(x&lt;0)&#123;<br>		x=x+Length(*&amp;L);<br>		goto shit1;<br>	&#125;<br>	if(x&gt;=Length(*&amp;L))&#123;<br>			x=x%Length(*&amp;L);<br>	&#125;<br>	if(x==0)&#123;<br>		return L-&gt;data;<br>	&#125;<br>	for(i=0;i&lt;x;i++)&#123;<br>		L=L-&gt;next;<br>	&#125;<br>	//printf(&quot;G3t 5ucc3553d,return=%d\n&quot;,L-&gt;data);<br>	return L-&gt;data;<br>&#125;<br><br>int IfEmpty(Node *L)&#123;<br>	if(L-&gt;next==NULL)<br>		return 1;<br>	else<br>		return 0;<br>&#125;<br><br>void Josephus(int n, int k,int a[])&#123;<br>	Node *head, *p, *q;<br>	head = NULL;<br>	for(int i = 1; i &lt;= n; ++ i)&#123;<br>		p = (Node*)malloc(sizeof(Node));<br>		p-&gt;data = a[i];<br>		p-&gt;next = NULL;<br>		if(head==NULL)&#123;<br>			head = p;<br>		&#125;else&#123;<br>			q-&gt;next = p;<br>		&#125;<br>		q = p;<br>	&#125;<br>	p-&gt;next = head;  //形成循环链表<br>	p = head;<br>	while(p-&gt;next!=p)&#123; // 条件不成立时循环链表中只有一个结点<br>		for(int i = 1; i &lt; k; ++ i)&#123;<br>			q = p;<br>			p = p-&gt;next;<br>		&#125;<br>		q-&gt;next = p-&gt;next;  <br>		printf(&quot;%d &quot;, p-&gt;data);<br>		free(p); 	  <br>		p = q-&gt;next;  // 新一轮计数的起点  <br>	&#125;<br>	printf(&quot;%d&quot;, p-&gt;data);<br>	return;<br>&#125;<br><br><br><br><br>int main()&#123;<br>	struct Node *L;<br>	int i,num,a[30],m,x;<br>shit:	printf(&quot;请输入初始报数上限数：\n&quot;);<br>	scanf(&quot;%d&quot;,&amp;num);<br>	if(num&gt;30)&#123;<br>		printf(&quot;err0r!!\n&quot;);<br>		goto shit;<br>	&#125;<br>	printf(&quot;请输入数组：\n&quot;);<br>	for(i=0;i&lt;num;i++)&#123;<br>		scanf(&quot;%d&quot;,&amp;x);<br>		a[i]=x;<br>	&#125;<br>	Init(*&amp;L,a,num);<br>	Print(*&amp;L);<br>	printf(&quot;请输入随机数m：\n&quot;);<br>	scanf(&quot;%d&quot;,&amp;m);<br>	Josephus(num,m,a);<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h3 id="列表排序"><a href="#列表排序" class="headerlink" title="列表排序"></a>列表排序</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br></pre></td><td class="code"><pre><code class="hljs code">#include&lt;stdio.h&gt;<br>#include&lt;malloc.h&gt;<br>struct Node&#123;<br>	int data;<br>	struct Node *next=NULL;<br>&#125;;<br>void Init(struct Node *&amp;L,int x[],int len)&#123;<br>	struct Node*p=((struct Node*)(malloc(sizeof(struct Node))));<br>	int i=0;<br>	L=p;<br>	for(i = 0;i&lt;len;i++)&#123;<br>		p-&gt;data=x[i];<br>		p-&gt;next=((struct Node*)(malloc(sizeof(struct Node))));<br>		p=p-&gt;next;<br>&#125;<br>	p-&gt;next=NULL; <br>	printf(&quot;Fini5h3d\n&quot;);<br>	return;<br>&#125;<br>void Insert(struct Node *&amp;L,int num,int d)&#123;<br>	int i=0;<br>	struct Node *a=((struct Node*)(malloc(sizeof(struct Node))));<br>	struct Node *p=L;<br>	while(i&lt;num-1)&#123;<br>		p=p-&gt;next;<br>		i++;				<br>	&#125;<br>	a-&gt;next=p-&gt;next;<br>	p-&gt;next=a;<br>	a-&gt;data=d;<br>	printf(&quot;插入成功！\n&quot;);<br>	return;<br>&#125;<br>void Delete(struct Node *&amp;L,int num)&#123;<br>	int i=0;<br>	Node *p=L;<br>	if(num==0)&#123;<br>		L=L-&gt;next;<br>		return;<br>	&#125;<br>	while(i&lt;num-1)&#123;<br>		p=p-&gt;next;<br>		i++;<br>	&#125;<br>	p-&gt;next=(p-&gt;next)-&gt;next;<br>	printf(&quot;删除成功！\n&quot;);<br>	return;<br>&#125;<br>void Print(struct Node *L)&#123;<br>	struct Node* trans=L;<br>	if(trans-&gt;next==NULL)&#123;<br>		printf(&quot;empty list!\n&quot;);<br>		return;<br>	&#125;<br>	while(trans-&gt;next!=NULL)&#123;<br>		printf(&quot;%d\n&quot;,trans-&gt;data);<br>		trans=trans-&gt;next;<br>	&#125;<br>	printf(&quot;显示完毕\n&quot;);<br>	return;<br>&#125;<br>void ChangeSpace(Node *&amp;L,int a1,int a2)&#123;<br>	Node *p=L;<br>	Node *q=L;<br>	int i; 	<br>	for(i=0;i&lt;a1;i++)&#123;<br>		p=p-&gt;next;   //此时p到了下标a处	<br>	&#125;<br>	for(i=0;i&lt;a2;i++)&#123;<br>		q=q-&gt;next; <br>	&#125;<br>	i=p-&gt;data;<br>	p-&gt;data=q-&gt;data;<br>	q-&gt;data=i;	<br>	return;<br>&#125;<br><br>int Length(Node *L)&#123;<br>	int i=0;<br>	<br>	while(L-&gt;next!=NULL)&#123;<br>		i++;<br>		L=L-&gt;next;<br>	&#125;<br>	return i;<br>&#125;<br><br><br><br>void Sorted(Node *&amp;L)&#123;<br>	int i,j,k,t;<br>	Node *p=L;<br>	int len=Length(*&amp;L);<br>	for(i=0;i&lt;len-1;i++)&#123;<br>		p=L;<br>		for(j=0;j&lt;len-1;j++)&#123;<br>			if(p-&gt;data&lt;p-&gt;next-&gt;data)&#123;<br>				t=p-&gt;data;<br>				p-&gt;data=p-&gt;next-&gt;data;<br>				p-&gt;next-&gt;data=t;<br>				 <br>			&#125;<br>			<br>			p=p-&gt;next;<br>		&#125;<br>	&#125;<br>	printf(&quot;fini5h3d!!\n&quot;);						<br>	return;	<br>&#125;<br><br>int main()&#123;<br>	struct Node *L;<br>	int num=5,data=12,x[]=&#123;3,7,6,1,5,9,10&#125;,len=sizeof(x)/sizeof(num); <br>	printf(&quot;初始化：\n&quot;);<br>	Init(L,x,len);<br>	Print(L);<br>	printf(&quot;排序\n&quot;);<br>	Sorted(*&amp;L);<br>	Print(L);<br>&#125;<br></code></pre></td></tr></table></figure>
+<h2 id="关于L和-amp-L的区别"><a href="#关于L和-amp-L的区别" class="headerlink" title="关于L和&amp;L的区别"></a>关于<em>L和</em>&amp;L的区别</h2><p>我定义了个链表结构体Node，并声明了一个结构体指针<em>L，然后定义1个初始化函数Init()，将</em>L作为参数传进去，结果函数运行结束后发现，<em>L的next和data地址的值并未改变，即函数里对</em>L的修改出了函数就没卵用了</p>
+<p>经查阅资料发现，原理是：将结构体指针传入函数时，函数内会做一个copy，但此时函数内的<em>L和函数外的</em>L指向的地址8一样，所以导致里面变化而外面不变</p>
+<p>解决方法：传参时，将结构体指针的引用传过去，当传入函数的参数规定为*&amp;L时，将改变传入实参的值，为*L时，8会改变值</p>
+<p>参考<br><a target="_blank" rel="noopener" href="https://blog.csdn.net/c991262331/article/details/83274525">csdn</a></p>
+<h2 id="amp-，引用"><a href="#amp-，引用" class="headerlink" title="&amp;，引用"></a>&amp;，引用</h2><p>地址是在电脑内存中的地址（变量的值在内存中的储存位置），指针是存地址的变量，所以指针可以“指向”内存地址。概念上讲，引用变量本质上是指针的另一个名字（但是并不能被编译器实例化）。。。wtf???这玩意你他妈不是学过吗?</p>
+<p>就把引用当成变量的另一个名字就好</p>
+<h2 id="typedef和struct的联用简写"><a href="#typedef和struct的联用简写" class="headerlink" title="typedef和struct的联用简写"></a>typedef和struct的联用简写</h2><p>eg:<br>typedef struct test{<br>    int x; int y;<br>}text1,text2;<br>typedef是取别名的意思<br>相当于把struct test 这种结构体取别名 叫 test1 或叫 test2<br>作用：可以直接用text1 test3的形式定义结构体变量（单纯为了简写）</p>
+<p>这你他妈不也学过吗?!</p>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/%E5%AF%84%E7%A7%91/">寄科</a>
+                    
+                      <a class="hover-with-bg" href="/categories/%E5%AF%84%E7%A7%91/%E7%BC%96%E7%A8%8B/">编程</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/%E5%AF%84%E7%A7%91/">寄科</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2021/09/28/%E6%94%AF%E7%BA%BF%E4%BB%BB%E5%8A%A1/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">支线任务</span>
+                        <span class="visible-mobile">Previous</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2021/09/02/%E5%86%85%E7%9C%81/">
+                        <span class="hidden-mobile">锻</span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;TOC</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  
+    <script  src="https://cdn.jsdelivr.net/npm/tocbot@4/dist/tocbot.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4/anchor.min.js" ></script>
+  
+  
+    <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js" ></script>
+  
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+        typing(title);
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+</body>
+</html>

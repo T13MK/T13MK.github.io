@@ -1,0 +1,472 @@
+
+
+<!DOCTYPE html>
+<html lang="en" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" href="https://t13mk.github.io/img/favicon.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="7bmk">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="Here&#39;s something encrypted, password is required to continue reading.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="web鸡肋漏洞积累???">
+<meta property="og:url" content="http://example.com/2021/12/27/web%E9%B8%A1%E8%82%8B%E6%BC%8F%E6%B4%9E%E7%A7%AF%E7%B4%AF/index.html">
+<meta property="og:site_name">
+<meta property="og:description" content="Here&#39;s something encrypted, password is required to continue reading.">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2021-12-27T13:15:22.000Z">
+<meta property="article:modified_time" content="2022-02-04T06:35:43.273Z">
+<meta property="article:author" content="7bmk">
+<meta property="article:tag" content="web">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
+  <title>web鸡肋漏洞积累??? - </title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4/github-markdown.min.css" />
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hint.css@2/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.css" />
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.8.14","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 6.0.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>7bmk</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                Home
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                About
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                友链
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="web鸡肋漏洞积累???">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2021-12-27 21:15" pubdate>
+        December 27, 2021 pm
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      234 字
+    </span>
+  
+
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      2 分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">web鸡肋漏洞积累???</h1>
+            
+            <div class="markdown-body">
+              <div class="hbe hbe-container" id="hexo-blog-encrypt" data-wpm="Oh, this is an invalid password. Check and try again, please." data-whm="OOPS, these decrypted content may changed, but you can still have a look.">
+  <script id="hbeData" type="hbeData" data-hmacdigest="31216b3c8aebd3a2d70f907a88577d048b493a30074d12ecd4c28b1fb17f8252">60fde17fe3cb86225f017c3399cf91d781cdb73b8fd5bd7fed72174e86634a4cbf38628f05d4baed3af2fc9bdfcb2514928af8ad8a45fe76eb0ac9989ba2d5442f00adb8348827aef912008f432f1617865f60a901b6fb109a3fa3b3361a47257994e2f09f4c29f97b831521e13c6fb5fa8b3eb329eb14d7b5d792c6ddc3d1df7b10a351caa6c22d0f79ef1bac52abde5df13a2baecea2d964c26d15d5026b2e94137048ce5723f07de47075c6f8825398717e0d74239e5b0be40775eb04312b7d65fed7903b7e68dace96f4ee89f713577347b3bf9667fa8430f15b590bf8a7e99329360b42ad8d09e9967fd7dc6d1698b83efc6cd6263aa30048aaf5cbdaa453d48d16f75345a105fc22dace61e869ef132cf0f22484f354f64f0e2e1d8c494a0fe822a979549f3401ceef6a53b8691fadd845916efb329373556351f131b19267b81b9ece3aa98411f1a266b41fc3f0fe382971c09debe12dee462618cb8e86b41f9de6d8b5e1b9837b6b6f1163daf764dcbc45042fc40563ccd1fd7b6a21619e72d1eee6d38cb69ee777b0dc513e5d028e1cca235c7c0532a9c4658d4e696e171dcee140df8c544b0d6b10d356ef29ac7512f5837be1ef4ad828e76b9eb04ec7b71f456ba54ca7f2760eff1dddc9a5ab302a170a409439ef2588a64098476f1c8def629adb2cee0475d77dc882b16b2a284ef34ce7787820036d95785985a944b00a893248f505da99dcca1b675bbfe5e1f3c665fe312669fe38e8267bb02cc8124e49f3307c8ed1058b47efdcc30c38cae184e6bf6354a2967ae092f0c2598a0e65c1e6de21da54a0a80e064e97c0a24e77fcbeafad30a6085a264f8b677c24dee397289319eef973ea9768187942452c79173aad744407bf0a34c34eac2c4be18236d0724f60391c9eb678a16bd0fc6375e782cb8c4ede4887e87541bfad505dc7aa3db6c57ff0dd2092bb87f788dfe61be43ac60033a6168f4ae095b14378aafb730b4c1edda06bbbc08a62f2c2ae3fe42f37f419d4420da206c07ec2be6a1e3baaf8584bf8cf61d86c3f0fdef3517cf7dec5ae0fc11c884a74e4391f7f5643c3c71b886f699c9bc0da931e85abf9bb131916fec6796f94557f1e1dada63263a655b6df9eae949ffbc8233405737088e206e9888052ed0887e6e81327a190e8722897c573845e2e2e9aca7b4f00a04993e6e4902ee83ef922cd0bcf2ceb875e7d3498822953a41d3dea87eda238d841672085228e12d60df1d556bb57213fb296351d498100a667b1d71f8e940d85a1be236092a7624c38e5fdbfde52e168c50afc434ab810db4e1571459d6185c8cb0f99baeac93211d05ff08807382dc6f8aed3d29ee32c3ad03e13af53fdb4d59b9f16ea561de046832d04e30611f7cb9a2ad7fc0410e74b67ba5f77071f14d2c68c561c3faccd3b6698e9c2ac3d2bbb46341219371d1aa2777cafe2260f332dd0319485bdaaaf75b9fca3399f16fb77c90f3a8156ae60faf4a55535050b7d4cadacb18b4ec0face03b0d06fcb6736e24fc90d53799e5b2db5150702abfae53e592dbac1747bad9b3676a345266579c2578c102a5fa5ea602fc8bed9d87cf61544155d8e362eedbe2f6dcdfd439f598bb74b38117ff8d0b78a2f0c884afe26bdff4ec61c4ddf490498916c6eda3244a76f338c0532e154cad116cdd72e759b4dfdca3b18774ad9ef9a6200fb70eba7df8a0040fa77d4fbb07089844c8233eefd98d4d2df9b0cfd7247300cccd8a858ec9611990ba0f9e6069041a5c99240d33510b6637c5bc71a2ec691b9b134b65f97cf10d5b9cb808c2a9a032cba86a1f32d15d4cf05c31ddd38c35998341a717003b666d3ae9f28021b6944059983029ac4aa1535cf45918aa4ec66f1edec3fb903feb48a72041217927df6bd37db68f20f859af0d275014973659cd553f65dd434ffd63e4281a44d483b5afa49248fd5a006ec41f1e7747fd0d779e862c007dab624d98f95045cd3cef23325e70fa1cf37f2693d9484be3ef848c241d3e3632163f44ba0e3139d636510ec6194b3afbf92626ef1fe88defdd3fa189df9c106979d8b680262759f2b93c2bd399e8b5cbf5abea5ce19b756dc730954b6fd91a4cc3ff5e5808033d06e765b22706056a3ac65b66b4f45b563af5af7da4aaa28b3604b7565e85fc7828887ac403b77ddde9f8b0f714294f6a1f72abfd423ae88df341386509edb27a7eda40c4cf98ff92caf2551997f223faf1e7a78b8ef1e522afa6ef920948e3e1a5deb7aebf232c18ef0b01266c724f3ab9914b8f2c4601f1a2e50ca8bcee4e65f655c22ae5e0b6b84cb3e0d30e5616247c176be824e902a22ed91c860a1b867d509b11527a36595278904a2340a94d43a89e502af789495827da92601761aa186dda5085fca75f69dcb9f36864eca36e2ab9c05bd1eeaa258b2686213e99e5e510768616212a970f756594d4133ae2357a8dad35b4bf65d1a0db7f8e6b8ea9c2fabda34bd0e8a825d57a1da9b076490caf4eff2d7475d9f5ce7dd7dc8eb44bc9a342bb9d21f505d9b040eb6bcdbb27e5907b295e6ff5de27a821e40bbe382f645b9872c8347e38c1711051abde96855ff98471bd7071d62c9db663628eafeaa2749ea58b1d1f49bdb347db925b92e743c1f4393fff726a3d3df74c52b3572236c779201d65fdac9d96e136f114599ed7f2b21ff30fc13a193cd759c36309724b6362d182e45ef752f87235dfbfda78de5e5112a13b821a34c7d462a51bec57681649e4aedba6c02466eac0a636acd38014de50442c89df63aa266b52a0c63135d2fdd2ff5649be39ab934d694b44384de57b2043156a49601ca65a0c4fcf76e0cdc3e23f2853550dd70d1c888bd884fff656dabcf6c006b0ed74fe8e2b85574bd26e4c5c7dc27fc28ae3f1cdea5ddec55e566e33c75adae30dbc0a9480b7372558479a6561d5240154f43f8be367615d6fcdea9a927c715c6e639e999963a4745e174895bec2818b1925e88a5bdded1acc1f591ff0a4bf840e7792b84ffe1b3fadaa48c3be162ba4ba17ecc2a10fd1f76e68470a3ef5cba8efeb362a5ebde1bb1966b5295d012b4a4fd6fa98c9845fc4e48679aca563c140f3d7b2b8bcda54c71dfa7a917a3f957311b7103b012b9dcf10bbfec3646eb014bf2e068a601fff15019085f68757b1cc690fac9c4a9659252916d21fba0ecbd8cb27c5412cc3917f3e391ce102f0e75d16d966e8dea5dc4305a54a4ad94dc53cd208f5d6240bf236ba55749c065dda5e732176ce6b707cf7cfaff64a01ad33693371e6b317ee64b7795f123a204880c314d2f8a583246d3c25ff2ffcd05a62c263da7eb0c16a66fcf907147acfe7d4a6a254b6f78e89d1cdfe74d73f574c9da365d7714d77d8ba86e692a01cc32b5a163b2272882fdbc7600fff3a7ce0a3e48c1613a21c1f874689cc1df4e80a134863f1ac430bdb1b8a7df0979b410560f3062cbc32db33eac7b270b04fd0beb62d416d1361df3fe77c7ca6b3064ffa9b448c0eec5fad7212f0e708098c3fdb4d4c0e4d3b238eb73edfd756bae2fc7183813234d7c61b8233c8e9784d79576a294f6c5</script>
+  <div class="hbe hbe-content">
+    <div class="hbe hbe-input hbe-input-default">
+      <input class="hbe hbe-input-field hbe-input-field-default" type="password" id="hbePass">
+      <label class="hbe hbe-input-label hbe-input-label-default" for="hbePass">
+        <span class="hbe hbe-input-label-content hbe-input-label-content-default">还没写好NONE</span>
+      </label>
+    </div>
+  </div>
+</div>
+<script data-pjax src="/lib/hbe.js"></script><link href="/css/hbe.style.css" rel="stylesheet" type="text/css">
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/CTF/">CTF</a>
+                    
+                      <a class="hover-with-bg" href="/categories/CTF/%E5%9F%BA%E7%A1%80/">基础</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/web/">web</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2021/12/28/%E9%97%AD%E5%8C%85%E7%89%B9%E6%80%A7%E7%9A%84%E4%B8%80%E4%BA%9B%E7%94%A8%E9%80%94-%E6%8A%84/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">闭包特性的一些用途(抄</span>
+                        <span class="visible-mobile">Previous</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2021/11/28/NCTF-%E5%BF%83%E6%80%81%E8%A3%82%E5%BC%80/">
+                        <span class="hidden-mobile">NCTF,心态裂开</span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;TOC</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  
+    <script  src="https://cdn.jsdelivr.net/npm/tocbot@4/dist/tocbot.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4/anchor.min.js" ></script>
+  
+  
+    <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js" ></script>
+  
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+        typing(title);
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+</body>
+</html>

@@ -1,0 +1,486 @@
+
+
+<!DOCTYPE html>
+<html lang="en" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" href="https://t13mk.github.io/img/favicon.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="7bmk">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="二维码补全也算misc的1个题型，最近摆烂ctf做了一个相对简单(有手就行)的题，8过还是花了整整1个晚上+将近半个白天，还是在wp贴脸的情况下。而反观一块打的梁佬，只靠网上找相关资料和阅读官方源文档就还原出了二维码，当时就震惊俺一脸(虽然最后是错的) 所以除了学到了如何补二维码这个 没卵用的 的技能外，和大佬打比赛也让俺看到了8少差距，也学到到要想打比赛以及成为一个 码农 嘿阔，检索资料和快速阅">
+<meta property="og:type" content="article">
+<meta property="og:title" content="二维码补全">
+<meta property="og:url" content="http://example.com/2022/01/13/%E4%BA%8C%E7%BB%B4%E7%A0%81%E8%A1%A5%E5%85%A8/index.html">
+<meta property="og:site_name">
+<meta property="og:description" content="二维码补全也算misc的1个题型，最近摆烂ctf做了一个相对简单(有手就行)的题，8过还是花了整整1个晚上+将近半个白天，还是在wp贴脸的情况下。而反观一块打的梁佬，只靠网上找相关资料和阅读官方源文档就还原出了二维码，当时就震惊俺一脸(虽然最后是错的) 所以除了学到了如何补二维码这个 没卵用的 的技能外，和大佬打比赛也让俺看到了8少差距，也学到到要想打比赛以及成为一个 码农 嘿阔，检索资料和快速阅">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://example.com/img/misc(3).jpg">
+<meta property="article:published_time" content="2022-01-12T18:52:30.000Z">
+<meta property="article:modified_time" content="2022-02-04T07:25:12.749Z">
+<meta property="article:author" content="7bmk">
+<meta property="article:tag" content="misc">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="http://example.com/img/misc(3).jpg">
+  
+  
+  <title>二维码补全 - </title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4/github-markdown.min.css" />
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hint.css@2/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.css" />
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.8.14","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 6.0.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>7bmk</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                Home
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                About
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                友链
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="二维码补全">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2022-01-13 02:52" pubdate>
+        January 13, 2022 am
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      1.6k 字
+    </span>
+  
+
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      13 分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">二维码补全</h1>
+            
+            <div class="markdown-body">
+              <p>二维码补全也算misc的1个题型，最近摆烂ctf做了一个相对简单(有手就行)的题，8过还是花了整整1个晚上+将近半个白天，还是在wp贴脸的情况下。<br>而反观一块打的梁佬，只靠网上找相关资料和阅读官方源文档就还原出了二维码，当时就震惊俺一脸(虽然最后是错的)</p>
+<p>所以除了学到了如何补二维码这个 <del>没卵用的</del> 的技能外，和大佬打比赛也让俺看到了8少差距，也学到到要想打比赛以及成为一个 <del>码农</del> 嘿阔，检索资料和快速阅读并阅读官方源文档的能力也是很重要的 <del>还有就是对自己要有信心，不要怂的连题都不敢下</del></p>
+<p>而俺做的这道题，虽然用了很长时间，但做完才发现其实简单的一批，因此本文章也记录了如何手撕数据块损坏的二维码</p>
+<h1 id="前置知识，关于二维码"><a href="#前置知识，关于二维码" class="headerlink" title="前置知识，关于二维码"></a>前置知识，关于二维码</h1><p>在做的时候，bbs里的1个wp帮俺少绕了很多弯，但也有些8好的地方，就是….这位大佬是纯手撕的，也就是把二维码的像素写在纸上然后手动根据掩码进行异或，这……只能说tql，真的头铁，于是俺一开始也陷入误区，准备手撕来着</p>
+<p>然后才知道在用对了工具后，这题可以有多简单</p>
+<p>2份参考文档，1份是内部论坛的文章，没有链接，另一份是梁佬做的时候找到的1份不错的文章: <a target="_blank" rel="noopener" href="https://www.cnblogs.com/luogi/articles/15469106.html#%E7%BA%A0%E9%94%99%E7%A0%81">链接</a>，里面有的东西就不在博客里重复了，建议配合食用</p>
+<p>首先了解一下二维码的组成<br><img src="/images/%E6%8A%97%E7%96%ABctf/misc(5).jpeg" srcset="/img/loading.gif" lazyload></p>
+<p>阔以看到，二维码的右半部分是数据块(data)，而左半部分是校验块(error_correction)，因此有了右半部分就等于有了全部信息，所以这道misc并不算撕二维码中的难题，只要把右半部分翻译就行了，但还是做了很久，因为当时没完全理解</p>
+<p>另外，标红的地方记录着二维码的样式信息，本题只能看到右上角的部分，但这就够了</p>
+<p>然后此处推荐一个在线撕二维码的网站: <a target="_blank" rel="noopener" href="https://h3110w0r1d.com/qrazybox/">链接</a>，怎么操作在上面的链接有提到</p>
+<h1 id="一道简单例题的wp"><a href="#一道简单例题的wp" class="headerlink" title="一道简单例题的wp"></a>一道简单例题的wp</h1><p>下载文件，发现是个只有半截的二维码<br><img src="/images/%E6%8A%97%E7%96%ABctf/misc(3).jpg" srcset="/img/loading.gif" lazyload></p>
+<p>正好联想起之前在bbs乱逛的时候看到1份年代久远(2018年)的帖子，上面写1位学长在遇到类似的题后如何进行手撕，十分详细，而且题的类型也和这一样，都是只有右半部分，于是爷想，这wp都贴脸了，还能做不出来?</p>
+<p>事实证明想错了，后来虽然做出来了，但发现这道题很简单，根本用不了俺折腾半个白天吧加1晚上，废柴属实了</p>
+<p>然后回到这道题，根据半截二维码可读出右上方部分的样式信息，即format的后8位，为: 11010000，根据这个阔以确定掩码类型，由下图可知，为:H3<br><img src="/images/%E6%8A%97%E7%96%ABctf/misc(6).jpeg" srcset="/img/loading.gif" lazyload><br>其中H代表纠错级别，为30%(即可还原30%损坏的数据块), 而3则代表掩码图案，如下图。至于掩码图案有啥用，上面的链接有写<br><img src="/images/%E6%8A%97%E7%96%ABctf/misc(7).jpeg" srcset="/img/loading.gif" lazyload></p>
+<p>于是在确定了掩码类型后，就阔以撕了!<br>先在上面说过的在线撕二维码的网站里把二维码都填进去<br><img src="/images/%E6%8A%97%E7%96%ABctf/misc(4).png" srcset="/img/loading.gif" lazyload></p>
+<p>上图并未填完整，还要把灰色的部分填成白的(一开始看到黑色就默认为白色导致识别不出来后面花了1晚上….真是生草，要不然1下午就能出来了)</p>
+<p>然后，根据确定的掩码图案类型，选中Tools-&gt;Data Masking(掩码异或)-&gt;对应的掩码类型(此处为3)，进行异或</p>
+<p><img src="/images/%E6%8A%97%E7%96%ABctf/misc(8).png" srcset="/img/loading.gif" lazyload></p>
+<p>然后再选择Tools-&gt;Extract QR Information(强制解码)，然后….就出flag了，没错，就这么简单<br><img src="/images/%E6%8A%97%E7%96%ABctf/misc(9).png" srcset="/img/loading.gif" lazyload></p>
+<h1 id="纠错码的计算"><a href="#纠错码的计算" class="headerlink" title="纠错码的计算"></a>纠错码的计算</h1><p>梁佬文档消化</p>
+<p>此处所有的东西在梁佬发的链接里都写了，就8重复了，因为有了自动解二维码的网站以及相关的Python模块，所以将文字转化为二维码的具体操作并不需要理解，只需要知道纠错码和数据的关系就好</p>
+<p>简单来说，纠错码是基于里德-所罗门纠错算法实现的，这个算法很复杂，8知道也无所谓，只要知道它的作用就好了，它的作用就是: 纠错，无了</p>
+<p>然后1个二维码，左半部分是纠错码，右半部分是数据块，当数据块缺损时，纠错码就排上了用场，阔以根据纠错码还原数据，当misc题里出现数据块缺损的二维码时，就阔以利用Python的reedsolo模块结合纠错码还原数据, 具体方法也在链接里有写；再将还原后的二维码放入网站解码</p>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/CTF/">CTF</a>
+                    
+                      <a class="hover-with-bg" href="/categories/CTF/%E5%9F%BA%E7%A1%80/">基础</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/misc/">misc</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2022/01/25/sql%E6%B3%A8%E5%85%A5%E5%A7%BF%E5%8A%BF/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">sql注入姿势</span>
+                        <span class="visible-mobile">Previous</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2022/01/11/php%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E5%A7%BF%E5%8A%BF%E5%AD%A6%E4%B9%A0/">
+                        <span class="hidden-mobile">php反序列化姿势笔记</span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;TOC</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  
+    <script  src="https://cdn.jsdelivr.net/npm/tocbot@4/dist/tocbot.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4/anchor.min.js" ></script>
+  
+  
+    <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js" ></script>
+  
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+        typing(title);
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+</body>
+</html>
