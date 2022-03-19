@@ -16,21 +16,21 @@
   <meta name="author" content="7bmk">
   <meta name="keywords" content="">
   
-    <meta name="description" content="学习中闭包的特性利用笔记 eg: 12345678def foo():    def bar():        print(&quot;dick&quot;)    return bar  #这里是return bar而8是return bar()a&#x3D;foo()a() 结果:    dick    上述代码函数内写了个函数bar(), 并把bar()函数作为1个变量返回(因为py中，函数和变量等">
+    <meta name="description" content="学习中闭包的特性利用笔记&amp;&amp;python函数装饰器本质是python的’一切皆对象’ 闭包的特性利用eg: 12345678def foo():    def bar():        print(&quot;dick&quot;)    return bar  #这里是return bar而8是return bar()a&#x3D;foo()a() 结果:    dick    上述代码">
 <meta property="og:type" content="article">
-<meta property="og:title" content="闭包特性的一些用途(抄">
+<meta property="og:title" content="闭包特性的一些用途(抄)&amp;&amp;python函数装饰器">
 <meta property="og:url" content="http://example.com/2021/12/28/%E9%97%AD%E5%8C%85%E7%89%B9%E6%80%A7%E7%9A%84%E4%B8%80%E4%BA%9B%E7%94%A8%E9%80%94-%E6%8A%84/index.html">
 <meta property="og:site_name">
-<meta property="og:description" content="学习中闭包的特性利用笔记 eg: 12345678def foo():    def bar():        print(&quot;dick&quot;)    return bar  #这里是return bar而8是return bar()a&#x3D;foo()a() 结果:    dick    上述代码函数内写了个函数bar(), 并把bar()函数作为1个变量返回(因为py中，函数和变量等">
+<meta property="og:description" content="学习中闭包的特性利用笔记&amp;&amp;python函数装饰器本质是python的’一切皆对象’ 闭包的特性利用eg: 12345678def foo():    def bar():        print(&quot;dick&quot;)    return bar  #这里是return bar而8是return bar()a&#x3D;foo()a() 结果:    dick    上述代码">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2021-12-28T02:39:54.000Z">
-<meta property="article:modified_time" content="2021-12-28T11:12:29.754Z">
+<meta property="article:modified_time" content="2022-03-06T14:22:37.844Z">
 <meta property="article:author" content="7bmk">
 <meta property="article:tag" content="寄科">
 <meta name="twitter:card" content="summary_large_image">
   
   
-  <title>闭包特性的一些用途(抄 - </title>
+  <title>闭包特性的一些用途(抄)&amp;&amp;python函数装饰器 - </title>
 
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
 
@@ -188,7 +188,7 @@
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
           <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="闭包特性的一些用途(抄">
+            <span class="h2" id="subtitle" title="闭包特性的一些用途(抄)&amp;&amp;python函数装饰器">
               
             </span>
 
@@ -209,7 +209,7 @@
   
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      569 字
+      982 字
     </span>
   
 
@@ -218,7 +218,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      5 分钟
+      9 分钟
     </span>
   
 
@@ -247,11 +247,11 @@
         <div class="py-5" id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">闭包特性的一些用途(抄</h1>
+            <h1 style="display: none">闭包特性的一些用途(抄)&amp;&amp;python函数装饰器</h1>
             
             <div class="markdown-body">
-              <p>学习中闭包的特性利用笔记</p>
-<p>eg:</p>
+              <p>学习中闭包的特性利用笔记&amp;&amp;python函数装饰器<br>本质是python的’一切皆对象’</p>
+<h1 id="闭包的特性利用"><a href="#闭包的特性利用" class="headerlink" title="闭包的特性利用"></a>闭包的特性利用</h1><p>eg:</p>
 <figure class="highlight python"><table><tr><td class="gutter"><div class="code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></div></td><td class="code"><pre><code class="hljs python"><br><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">foo</span>():</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">bar</span>():</span><br>        <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;dick&quot;</span>)<br>    <span class="hljs-keyword">return</span> bar  <span class="hljs-comment">#这里是return bar而8是return bar()</span><br><br>a=foo()<br>a()<br></code></pre></td></tr></table></figure>
 <p>结果:</p>
 <blockquote>
@@ -289,6 +289,13 @@
 <p>还有什么用呢?好像没了</p>
 <h2 id="可以取代生成全局变量"><a href="#可以取代生成全局变量" class="headerlink" title="可以取代生成全局变量"></a>可以取代生成全局变量</h2><p>eg:</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">x</span>(<span class="hljs-params">a,b</span>):</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">y</span>(<span class="hljs-params">a,b</span>):</span><br>        <span class="hljs-built_in">print</span>(a,b)<br>    <span class="hljs-keyword">return</span> y<br></code></pre></td></tr></table></figure>
+
+<h1 id="函数装饰器"><a href="#函数装饰器" class="headerlink" title="函数装饰器"></a>函数装饰器</h1><p>装饰器本质是函数或者类，他的作用是: 8对原函数做任何修改，而阔以通过创建新韩淑的方式来为原函数增加新的功能<br>eg:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">func1</span>:</span><br>    <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;abc&quot;</span>)<br>    <br><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">ch4nge_func</span>(<span class="hljs-params">func1</span>):</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">func2</span>(<span class="hljs-params">func1</span>):</span><br>        <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;d3f&quot;</span>)<br>        <span class="hljs-keyword">return</span> func1<br>    <span class="hljs-keyword">return</span> func2<br><br>f00=ch4nge_func(func1)<br>f00()<br></code></pre></td></tr></table></figure>
+<p>结果: &gt;&gt;&gt;<br>abc<br>d3f</p>
+<p>此处的ch4nge_func只是定义了func2，? 这就是装饰器的特性了: 任何时候调用ch4nge_func，都会调用里面所定义的函数; 并且，里面定义的函数时无法在外边被访问的</p>
+<p>在学完闭包后感觉有种无限套娃的感觉…<del>实质上是Python灵活性的体现(废话) ‘一切皆对象’</del></p>
+
             </div>
             <hr>
             <div>
@@ -334,8 +341,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2021/12/27/web%E9%B8%A1%E8%82%8B%E6%BC%8F%E6%B4%9E%E7%A7%AF%E7%B4%AF/">
-                        <span class="hidden-mobile">web鸡肋漏洞积累???</span>
+                      <a href="/2021/11/28/NCTF-%E5%BF%83%E6%80%81%E8%A3%82%E5%BC%80/">
+                        <span class="hidden-mobile">NCTF,心态裂开</span>
                         <span class="visible-mobile">Next</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
