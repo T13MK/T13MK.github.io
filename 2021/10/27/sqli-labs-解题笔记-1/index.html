@@ -23,13 +23,13 @@
 <meta property="og:site_name">
 <meta property="og:description" content="注入的基本操作(字符型、数字型、优先匹配、强制字符转换), sqli_labs1-4关 1个菜b学sql注入的笔记，大佬绕过 前置知识: 10以内加减法、mysql语法，建议去w3school 俺第一次学的时候感觉进步很慢，很难，然后就咕咕了，后来发现还是要先打好基础，后面会简单一些 由于没学过数据库，0基础fw,所以前面水的比较多，后面就8废话了 另外，信安日记这篇讲得8错，很通俗，阔以对照着看">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="http://example.com/images/sqli_labs/sqli_labs(1).png">
+<meta property="og:image" content="https://t13mk.github.io/images/sqli_labs/sqli_labs.png">
 <meta property="article:published_time" content="2021-10-27T11:32:55.000Z">
-<meta property="article:modified_time" content="2022-03-04T01:36:42.050Z">
+<meta property="article:modified_time" content="2022-04-09T10:29:30.464Z">
 <meta property="article:author" content="7bmk">
 <meta property="article:tag" content="web">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="http://example.com/images/sqli_labs/sqli_labs(1).png">
+<meta name="twitter:image" content="https://t13mk.github.io/images/sqli_labs/sqli_labs.png">
   
   
   <title>sqli_lab 解题笔记(1) - </title>
@@ -211,7 +211,7 @@
   
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      4.7k 字
+      3.9k 字
     </span>
   
 
@@ -220,7 +220,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      40 分钟
+      33 分钟
     </span>
   
 
@@ -258,18 +258,11 @@
 <p>俺第一次学的时候感觉进步很慢，很难，然后就咕咕了，后来发现还是要先打好基础，后面会简单一些</p>
 <p>由于没学过数据库，0基础fw,所以前面水的比较多，后面就8废话了</p>
 <p>另外，<a target="_blank" rel="noopener" href="https://blog.51cto.com/skytina/1698724">信安日记</a>这篇讲得8错，很通俗，阔以对照着看</p>
-<p>SQL注入原理，虽然简单，还是再叙述一下, 巩固理解.大致就是你传进1个参，然后服务器会执行php文件的命令，然后你就阔以在传参上做点手脚</p>
+<p>SQL注入原理，虽然简单，还是再叙述一下, 大致就是你传进1个参，然后服务器会执行php文件的命令，然后你就阔以在传参上做点手脚</p>
 <p>比如这个php文件里有这样1个命令:<br>$sql&#x3D;”SELECT * FROM users WHERE id&#x3D;’$id’ LIMIT 0,1”;(其中$sql就是你传的参)<br>如果传入&#x2F;?id&#x3D;-1’ DELETE database() – ，原语句就变意思了，服务器就会识别成删库语句，然后就…</p>
-<h1 id="前置知识"><a href="#前置知识" class="headerlink" title="前置知识"></a>前置知识</h1><p>可以先跳过直接日题, 回来再看</p>
-<h2 id="关于database、schema、table等的关系"><a href="#关于database、schema、table等的关系" class="headerlink" title="关于database、schema、table等的关系"></a>关于database、schema、table等的关系</h2><p>database是个旅馆，schema是房间，table是床，users有的可以操作schema(eg:房客)，有的可以操作database(eg:老鸨)</p>
-<h2 id="语法之类"><a href="#语法之类" class="headerlink" title="语法之类"></a>语法之类</h2><h3 id="–"><a href="#–" class="headerlink" title="–+"></a>–+</h3><p>‘– ‘: 注释(–后有空格)，在url码中空格用+代替<br>还有众所周知php语句不分大小写</p>
-<h3 id="关于UNION"><a href="#关于UNION" class="headerlink" title="关于UNION"></a>关于UNION</h3><p>注意UNION联合查询所联合的2个SELECT语句的列数必须相同:SELECT name,password FROM shit UNION SELSCT 1,2 (√)   –+ 此处SELECT 1,2,3: 显示1,2,3的值</p>
-<h3 id="user-database"><a href="#user-database" class="headerlink" title="user(),database()"></a>user(),database()</h3><p>这2个函数，user()返回mysql当前连接的用户名、主机名，另一个返回当前或默认数据库</p>
-<h3 id="users、databases、tables、columns关键字"><a href="#users、databases、tables、columns关键字" class="headerlink" title="users、databases、tables、columns关键字"></a>users、databases、tables、columns关键字</h3><p>2个关键字，和user()、database()差8多<br>eg:</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><div class="code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">show</span> databases;<br><span class="hljs-keyword">show</span> users;<br></code></pre></td></tr></table></figure>
-
+<h1 id="前置知识"><a href="#前置知识" class="headerlink" title="前置知识"></a>前置知识</h1><h2 id="关于database、schema、table等的关系"><a href="#关于database、schema、table等的关系" class="headerlink" title="关于database、schema、table等的关系"></a>关于database、schema、table等的关系</h2><p>database是个旅馆，schema是房间，table是床，users有的可以操作schema(eg:房客)，有的可以操作database(eg:老鸨)</p>
 <h3 id="优先匹配"><a href="#优先匹配" class="headerlink" title="优先匹配"></a>优先匹配</h3><p>在where语句中，当出现多个字符串的时候，“&#x3D;”将会选择优先级最高的一个，优先级是从左到右，依次降低的！也就是离“&#x3D;”最近的一个。<br>eg:</p>
-<figure class="highlight axapta"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs axapta"><span class="hljs-keyword">select</span> * <span class="hljs-keyword">from</span> users <span class="hljs-keyword">where</span> user_id = <span class="hljs-string">&#x27;1&#x27;</span><span class="hljs-string">&#x27;&#x27;</span>;<br></code></pre></td></tr></table></figure>
+<figure class="highlight axapta"><table><tr><td class="gutter"><div class="code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><pre><code class="hljs axapta"><span class="hljs-keyword">select</span> * <span class="hljs-keyword">from</span> users <span class="hljs-keyword">where</span> user_id = <span class="hljs-string">&#x27;1&#x27;</span><span class="hljs-string">&#x27;&#x27;</span>;<br></code></pre></td></tr></table></figure>
 <figure class="highlight axapta"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs axapta"><span class="hljs-keyword">select</span> * <span class="hljs-keyword">from</span> users <span class="hljs-keyword">where</span> user_id = <span class="hljs-string">&#x27;1&#x27;</span><span class="hljs-string">&#x27;shit&#x27;</span>;<br></code></pre></td></tr></table></figure>
 <figure class="highlight axapta"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs axapta"><span class="hljs-keyword">select</span> * <span class="hljs-keyword">from</span> users <span class="hljs-keyword">where</span> user_id = <span class="hljs-string">&#x27;1&#x27;</span><span class="hljs-string">&#x27;shit&#x27;</span><span class="hljs-string">&#x27;qnmd&#x27;</span>;<br></code></pre></td></tr></table></figure>
 <p>以上查询结果都一样，等同于只输1个’1’</p>
@@ -278,9 +271,7 @@
 <h4 id="group-concat"><a href="#group-concat" class="headerlink" title="group_concat():"></a>group_concat():</h4><p>要知道这个，得知道GROUP BY，见下面</p>
 <p>然后回到group_concat()，它就是将GROUP BY产生的分组里的字符~~~拼~~~连接，作为1个字符返回</p>
 <h4 id="group-by"><a href="#group-by" class="headerlink" title="group by"></a>group by</h4><p>一般和GROUP_CONCAT混用，用于数据分组</p>
-<p>用途:比如叫shit的数据库长这样:<br>mysql&gt; SELECT * FROM shit;<br>+—–+———+——-+————+<br>| aid | site_id | count | date       |<br>+—–+———+——-+————+<br>|   1 |       1 |    45 | 2016-05-10 |<br>|   2 |       3 |   100 | 2016-05-13 |<br>|   3 |       1 |   230 | 2016-05-14 |<br>|   4 |       2 |    10 | 2016-05-14 |<br>|   5 |       5 |   205 | 2016-05-14 |<br>|   6 |       4 |    13 | 2016-05-15 |<br>|   7 |       3 |   220 | 2016-05-15 |<br>|   8 |       5 |   545 | 2016-05-16 |<br>|   9 |       3 |   201 | 2016-05-17 |<br>+—–+———+——-+————+</p>
-<p>看着8太方便，所以就用到group by: SELECT site_id,GROUP_CONCAT(count) FROM shit GROUP BY site_id<br>+———+——-+<br>| site_id | count |<br>|  1      |45,230 |<br>|  2      |10     |<br>+———+——-+<br>    .<br>    .<br>    .</p>
-<p>GROUP BY:对数据分组</p>
+<p><img src="/images/sqli_labs/sqli_labs(9).png" srcset="/img/loading.gif" lazyload></p>
 <h3 id="information-schema"><a href="#information-schema" class="headerlink" title="information_schema"></a>information_schema</h3><p>很牛逼的数据库，相当于新华字典，里面存着数据库名字等关键信息<br>m0r3:<br>information_schema下的表:<br>    schemata:(schema_data缩写)提供所有数据库信息，里面有schema_name</p>
 <div class="code-wrapper"><pre><code class="hljs">tables:table_name,所有表名; table_schema:所有表所在数据库名称
 eg: select group_concat(table_name) from information_schema.tables where table_schema=&#39;qnmd&#39;-- (找&#39;qnmd&#39;数据库下的所有表)
@@ -298,25 +289,21 @@ eg: select group_concat(column_name) from information_schema.columns where table
 <p>结果:<br>Welcome    Dhakkan<br>Your Login name:2<br>Your Password:3 </p>
 <p>说明有2个显示位(有时，SELECT语句会限制输出的行数(比如SELECT * FROM users WHERE id&#x3D;’$id’ LIMIT 0,1)，这时候就需要让第一行失效)</p>
 <h2 id="找出数据库名，表名、列名"><a href="#找出数据库名，表名、列名" class="headerlink" title="找出数据库名，表名、列名"></a>找出数据库名，表名、列名</h2><p>将id&#x3D;1改成数据库8存在的值，这样显示的时候便不占用显示位(原理:因为没有，所以8会显示)</p>
-<p>?id&#x3D;qnmd’ union select 1,(select group_concat(schema_name) from information_schema.schemata),3 – </p>
-<p>对俺这种0基础fw信息量稍大，逐字解析</p>
-<p>GROUP_CONCAT, schema_name, schema_name：见上文<br>indormation.schemata: 加information_schema是因为schemata在当前数据库没有，而是在information_schema里，要先换到另一个数据库</p>
-<p>tips: GROUP_CONCAT此处后面没有GROUP BY，所以是直接将所有的列打包到一块，作为1个字符串，结果显示:emails,referers,uagents,users，若不加GROUP_CONCAT()则只显示emails</p>
-<h1 id="lesson-2-数字型注入"><a href="#lesson-2-数字型注入" class="headerlink" title="lesson_2 数字型注入"></a>lesson_2 数字型注入</h1><p>众所周知，数字型注入也是个基本注入类型。</p>
-<h2 id="判断是否是数字型"><a href="#判断是否是数字型" class="headerlink" title="判断是否是数字型"></a>判断是否是数字型</h2><p>只需要通过简单的加减法就阔以判断啦!(此处主义，在url码里+是空格，所以要用%2B表示+)</p>
+<p>?id&#x3D;qnmd’ union select 1,(select group_concat(schema_name) from information_schema.schemata),3 –<br>来手逐字解析，比较0基础</p>
+<p>GROUP_CONCAT, schema_name, schema_name：见上文<br>indormation.schemata: 加information_schema是因为schemata在当前数据库没有，而是在information_schema里，要先换到另一个数据库<br>tips: GROUP_CONCAT此处后面没有GROUP BY，所以是直接将所有的列打包到一块，作为1个字符串，结果显示:emails,referers,uagents,users，若不加GROUP_CONCAT()则只显示emails</p>
+<h1 id="lesson-2-数字型注入"><a href="#lesson-2-数字型注入" class="headerlink" title="lesson_2 数字型注入"></a>lesson_2 数字型注入</h1><p>众所周知，数字型注入也是个基本注入类型</p>
+<h2 id="判断是否是数字型"><a href="#判断是否是数字型" class="headerlink" title="判断是否是数字型"></a>判断是否是数字型</h2><p>只需要通过简单的加减法就阔以判断啦!(此处注意，在url码里+是空格，所以要用%2B表示+)</p>
 <p>首先输入&#x2F;?id&#x3D;1’，显示错误，但是当输入&#x2F;?id&#x3D;1’– 时仍然错误，然后注意此处返回的报错:<br>You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ‘’ LIMIT 0,1’ at line 1<br>而不是:<br>Unknown column ‘1’’ in ‘where clause’<br>所以说明这里的’并没有被php里的某些防护函数转义(相关知识见下方)</p>
 <p>然后输入&#x2F;?id&#x3D;1+1，返回结果和&#x2F;?id&#x3D;2一样，就阔以说明是数字型注入了</p>
 <p>数字型注入和字符型的区别8大，不需要用’闭合就是了，略</p>
 <h3 id="tips-小提一下php里的一些转义函数"><a href="#tips-小提一下php里的一些转义函数" class="headerlink" title="tips, 小提一下php里的一些转义函数"></a>tips, 小提一下php里的一些转义函数</h3><p>有时候php里的一些函数在传入的参里有’,”,&#x2F;等字符时，会在其前面自动补’&#x2F;‘对1其转义，防止sql注入</p>
-<h1 id="lesson-3-需要闭合括号的注入"><a href="#lesson-3-需要闭合括号的注入" class="headerlink" title="lesson_3 需要闭合括号的注入"></a>lesson_3 需要闭合括号的注入</h1><p>首先构造闭合单引&#x2F;?id&#x3D;1’，返回报错: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ‘’1’’) LIMIT 0,1’ at line 1</p>
-<p>发现了一个奇怪的’(‘，搜索得知，这是个需要闭合括号的注入, 查看php源码发现它的指令如下:</p>
+<h1 id="lesson-3-需要闭合括号的注入"><a href="#lesson-3-需要闭合括号的注入" class="headerlink" title="lesson_3 需要闭合括号的注入"></a>lesson_3 需要闭合括号的注入</h1><p>首先构造闭合单引&#x2F;?id&#x3D;1’，返回报错: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ‘’1’’) LIMIT 0,1’ at line 1<br>发现了一个奇怪的’(‘，搜索得知，这是个需要闭合括号的注入, 查看php源码发现它的指令如下:</p>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql">$<span class="hljs-keyword">sql</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">select</span> <span class="hljs-operator">*</span> <span class="hljs-keyword">from</span> <span class="hljs-keyword">user</span> <span class="hljs-keyword">where</span> id<span class="hljs-operator">=</span>(<span class="hljs-string">&#x27;$id&#x27;</span>);<br></code></pre></td></tr></table></figure>
 <p>而我们之前注入的php源码则是这样:</p>
 <figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs routeros"><span class="hljs-variable">$sql</span> = select * <span class="hljs-keyword">from</span><span class="hljs-built_in"> user </span>where <span class="hljs-attribute">id</span>=<span class="hljs-string">&#x27;$id&#x27;</span>;<br></code></pre></td></tr></table></figure>
 <p>所以加个’)’进行闭合就阔以啦!<br>实操，很ez</p>
 <figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs pgsql">?id=<span class="hljs-number">1</span><span class="hljs-string">&#x27;) union select 1,database(),user()</span><br><span class="hljs-string">?id=-1&#x27;</span>) <span class="hljs-keyword">union</span> <span class="hljs-keyword">select</span> <span class="hljs-number">1</span>,group_concat(<span class="hljs-built_in">table_name</span>),<span class="hljs-keyword">user</span>() <span class="hljs-keyword">from</span> information_schema.<span class="hljs-keyword">tables</span> <span class="hljs-keyword">where</span> table_schema=<span class="hljs-string">&#x27;security&#x27;</span> <span class="hljs-comment">-- </span><br>?id=<span class="hljs-number">-1</span><span class="hljs-string">&#x27;) union select 1,group_concat(column_name),user() from information_schema.columns where table_name=&#x27;</span>users<span class="hljs-string">&#x27; -- </span><br><span class="hljs-string">?id=-1&#x27;</span>) <span class="hljs-keyword">union</span> <span class="hljs-keyword">select</span> <span class="hljs-number">1</span>,group_concat(username),group_concat(<span class="hljs-keyword">password</span>) <span class="hljs-keyword">from</span> users <span class="hljs-comment">-- </span><br></code></pre></td></tr></table></figure>
 <p><img src="/images/sqli_labs/sqli_labs(1).png" srcset="/img/loading.gif" lazyload></p>
-<h1 id="lesson-4-基于双引号的注入"><a href="#lesson-4-基于双引号的注入" class="headerlink" title="lesson_4 基于双引号的注入"></a>lesson_4 基于双引号的注入</h1><p>……<br>就8废话了, 和上一道的唯一区别就是这里要用双引号闭合，过</p>
 <h1 id="数字型注入知识点"><a href="#数字型注入知识点" class="headerlink" title="数字型注入知识点"></a>数字型注入知识点</h1><h2 id="数字型和字符型的区别"><a href="#数字型和字符型的区别" class="headerlink" title="数字型和字符型的区别"></a>数字型和字符型的区别</h2><p>数字型传入的参数8是包裹在引号里的，传入的参会被转化为数字，比如传入id&#x3D;1+1，系统会查找id&#x3D;2的行</p>
 <p>其注入方法，除了8需要用’闭合外，和字符型注入差不多</p>
 <h2 id="强制类型转换"><a href="#强制类型转换" class="headerlink" title="强制类型转换"></a>强制类型转换</h2><p>php里的强制类型转换规则，和c可8大一样</p>
@@ -361,7 +348,7 @@ eg: select group_concat(column_name) from information_schema.columns where table
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2021/10/29/sqli-lab-%E8%A7%A3%E9%A2%98%E7%AC%94%E8%AE%B0-2/">
+                      <a href="/2021/10/29/sqli-labs-%E8%A7%A3%E9%A2%98%E7%AC%94%E8%AE%B0-2/">
                         <i class="iconfont icon-arrowleft"></i>
                         <span class="hidden-mobile">sqli_labs 解题笔记(2)</span>
                         <span class="visible-mobile">Previous</span>
