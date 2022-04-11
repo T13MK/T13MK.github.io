@@ -29,6 +29,33 @@
     
     
     <entry>
+      <title>SSTI模板注入</title>
+      <link href="/2022/04/09/SSTI%E6%A8%A1%E6%9D%BF%E6%B3%A8%E5%85%A5/"/>
+      <url>/2022/04/09/SSTI%E6%A8%A1%E6%9D%BF%E6%B3%A8%E5%85%A5/</url>
+      
+        <content type="html"><![CDATA[<p>嗯…..终于学到这个了，老规矩，先挖坑，以后填</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> CTF </category>
+          
+          <category> 基础 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> web </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>刷题(0x02)</title>
       <link href="/2022/04/09/%E5%88%B7%E9%A2%98-0x02/"/>
       <url>/2022/04/09/%E5%88%B7%E9%A2%98-0x02/</url>
