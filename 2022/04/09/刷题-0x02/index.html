@@ -24,7 +24,7 @@
 <meta property="og:description" content="web[ACTF2020 新生赛]BackupFile (渗透基本步骤: dirsearch扫包)进入页面发现提示: Try to find out source file!只能想到拿御剑扫扫，然后发现毛都没有那这两天刚学的dirsearch忘了吗？？？无语 于是使用命令，先进入dirsearch的文件夹，然后python dirsearch.py -u url 然后发现全是429请求过快…但是8">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2022-04-09T05:02:48.000Z">
-<meta property="article:modified_time" content="2022-04-11T09:30:51.463Z">
+<meta property="article:modified_time" content="2022-04-16T12:09:45.783Z">
 <meta property="article:author" content="7bmk">
 <meta property="article:tag" content="misc">
 <meta property="article:tag" content="web">
@@ -210,7 +210,7 @@
   
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      663 字
+      3k 字
     </span>
   
 
@@ -219,7 +219,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      6 分钟
+      25 分钟
     </span>
   
 
@@ -253,10 +253,32 @@
             <div class="markdown-body">
               <h1 id="web"><a href="#web" class="headerlink" title="web"></a>web</h1><h2 id="ACTF2020-新生赛-BackupFile-渗透基本步骤-dirsearch扫包"><a href="#ACTF2020-新生赛-BackupFile-渗透基本步骤-dirsearch扫包" class="headerlink" title="[ACTF2020 新生赛]BackupFile (渗透基本步骤: dirsearch扫包)"></a>[ACTF2020 新生赛]BackupFile (渗透基本步骤: dirsearch扫包)</h2><p>进入页面发现提示: Try to find out source file!<br>只能想到拿御剑扫扫，然后发现毛都没有<br>那这两天刚学的dirsearch忘了吗？？？无语</p>
 <p>于是使用命令，先进入dirsearch的文件夹，然后python dirsearch.py -u url</p>
-<p>然后发现全是429请求过快…但是8会影响结果，因为这是个比较温和的警报<br>总之扫到了index.php.bak，下载，查看源码</p>
+<p>然后发现全是429请求过快…但是8影响，因为这是个比较温和的警报<br>总之扫到了index.php.bak，下载，查看源码</p>
 <figure class="highlight php"><table><tr><td class="gutter"><div class="code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></div></td><td class="code"><pre><code class="hljs php"><span class="hljs-meta">&lt;?php</span><br><span class="hljs-keyword">include_once</span> <span class="hljs-string">&quot;flag.php&quot;</span>;<br><br><span class="hljs-keyword">if</span>(<span class="hljs-keyword">isset</span>(<span class="hljs-variable">$_GET</span>[<span class="hljs-string">&#x27;key&#x27;</span>])) &#123;<br>    <span class="hljs-variable">$key</span> = <span class="hljs-variable">$_GET</span>[<span class="hljs-string">&#x27;key&#x27;</span>];<br>    <span class="hljs-keyword">if</span>(!is_numeric(<span class="hljs-variable">$key</span>)) &#123;<br>        <span class="hljs-keyword">exit</span>(<span class="hljs-string">&quot;Just num!&quot;</span>);<br>    &#125;<br>    <span class="hljs-variable">$key</span> = intval(<span class="hljs-variable">$key</span>);<br>    <span class="hljs-variable">$str</span> = <span class="hljs-string">&quot;123ffwsfwefwf24r2f32ir23jrw923rskfjwtsw54w3&quot;</span>;<br>    <span class="hljs-keyword">if</span>(<span class="hljs-variable">$key</span> == <span class="hljs-variable">$str</span>) &#123;<br>        <span class="hljs-keyword">echo</span> <span class="hljs-variable">$flag</span>;<br>    &#125;<br>&#125;<br><span class="hljs-keyword">else</span> &#123;<br>    <span class="hljs-keyword">echo</span> <span class="hljs-string">&quot;Try to find out source file!&quot;</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
 <p>很简单，一个弱等于，构造payload: key&#x3D;123</p>
-<h2 id="护网杯-2018-easy-tornado-SSTI模板注入"><a href="#护网杯-2018-easy-tornado-SSTI模板注入" class="headerlink" title="[护网杯 2018]easy_tornado  (SSTI模板注入)"></a>[护网杯 2018]easy_tornado  (SSTI模板注入)</h2>
+<h2 id="护网杯-2018-easy-tornado-SSTI模板注入"><a href="#护网杯-2018-easy-tornado-SSTI模板注入" class="headerlink" title="[护网杯 2018]easy_tornado  (SSTI模板注入)"></a>[护网杯 2018]easy_tornado  (SSTI模板注入)</h2><p>终于学到模板注入了</p>
+<p>tornado是Python下的1个web模板框架<br>进入页面，发现以下可访问项:<br>&#x2F;flag.txt<br>&#x2F;welcome.txt<br>&#x2F;hints.txt<br>分别访问，结果如下:<br>页面: &#x2F;file?filename&#x3D;&#x2F;flag.txt&amp;filehash&#x3D;5623eec5b6308052633aef08ea7d497a<br>结果:<br>&#x2F;flag.txt<br>flag in &#x2F;fllllllllllllag</p>
+<p>页面: &#x2F;file?filename&#x3D;&#x2F;welcome.txt&amp;filehash&#x3D;086cb0e1be24629a233966b3131a3443<br>结果:<br>&#x2F;welcome.txt<br>render</p>
+<p>页面: &#x2F;file?filename&#x3D;&#x2F;hints.txt&amp;filehash&#x3D;0af2fd6996c0cf35b0f7d6f3bd8b29b0<br>结果:<br>&#x2F;hints.txt<br>md5(cookie_secret+md5(filename))</p>
+<p>这个hint….有啥用? cookie_secret: balabala，说白了就是对文件进行哈希验证</p>
+<p>思路: 需要找到cookie_secret，然后和md5(filename)拼接才能通过验证，查看flag</p>
+<p>存在msg参数(这个msg参数是怎么来的呢? 是发现在尝试注入报错后会返回这么个东西: <a target="_blank" rel="noopener" href="http://42f63a3c-968f-48fa-a487-ae00bcb04161.node4.buuoj.cn:81/error?msg=Error">http://42f63a3c-968f-48fa-a487-ae00bcb04161.node4.buuoj.cn:81/error?msg=Error</a>)<br>那么cookie_secret怎么来的呢? 这就考验你查阅官方文档(全tm英文)的能力了</p>
+<p>构造payload: error?msg&#x3D;<br>就阔以获得cookie_secret了: {‘autoreload’: True, ‘compiled_template_cache’: False, ‘cookie_secret’: ‘3f239178-c592-4337-9b6a-4bf7d50d3a25’} </p>
+<p>md5(filename): 3bf9f6cf685a6dd8defadabfb41a03a1<br>md5(cookie_secret+md5(filename)): b5c5087056961d3c3b65dd600d92d43b<br>成功得到flag</p>
+<h2 id="极客大挑战-2019-BuyFlag-啥也么考，但是你没做出来…"><a href="#极客大挑战-2019-BuyFlag-啥也么考，但是你没做出来…" class="headerlink" title="[极客大挑战 2019]BuyFlag (啥也么考，但是你没做出来….)"></a>[极客大挑战 2019]BuyFlag (啥也么考，但是你没做出来….)</h2><p>进入后有2个页面，1个是index.php，1个是pay.php</p>
+<p>pay.php页面显示如下:<br>Flag<br>Flag need your 100000000 money<br>attention<br>If you want to buy the FLAG:<br>You must be a student from CUIT!!!<br>You must be answer the correct password!!!<br>Only Cuit’s students can buy the FLAG</p>
+<p>思路: 身份认证，先抓包看有什么能改的<br>cookie里的user由0改1，发现多了几行字: you are Cuiter<br>Please input your password!!<br>(这个一开始还没看到，看来有时候还是得放到burp-repeater里看)</p>
+<p>然后又么头绪了….看wp发现查看源码就行了…..你个sb</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs html"><span class="hljs-comment">&lt;!--</span><br><span class="hljs-comment">	~~~post money and password~~~</span><br><span class="hljs-comment">if (isset($_POST[&#x27;password&#x27;])) &#123;</span><br><span class="hljs-comment">	$password = $_POST[&#x27;password&#x27;];</span><br><span class="hljs-comment">	if (is_numeric($password)) &#123;</span><br><span class="hljs-comment">		echo &quot;password can&#x27;t be number&lt;/br&gt;&quot;;</span><br><span class="hljs-comment">	&#125;elseif ($password == 404) &#123;</span><br><span class="hljs-comment">		echo &quot;Password Right!&lt;/br&gt;&quot;;</span><br><span class="hljs-comment">	&#125;</span><br><span class="hljs-comment">&#125;</span><br><span class="hljs-comment">--&gt;</span><br></code></pre></td></tr></table></figure>
+<p>is_numeric绕过，令password&#x3D;404a即可</p>
+<p>回显: Password Right! Pay for the flag!!!hacker!!!<br>再输入money&#x3D;1000000，回显: Nember lenth is too long<br>参数太长，试试16进制，发现还是太长…<br>那….还能怎么绕过?<br>wp写的是科学计数法: 1e9， 额…….你个憨批</p>
+<h2 id="HCTF-2018-admin-Unicode欺骗-amp-session伪造"><a href="#HCTF-2018-admin-Unicode欺骗-amp-session伪造" class="headerlink" title="[HCTF 2018]admin (Unicode欺骗 &amp; session伪造)"></a>[HCTF 2018]admin (Unicode欺骗 &amp; session伪造)</h2><p>这题简单的侮辱智商，但是wp里的方法还是有必要学习一下</p>
+<p>进入页面，先注册账户(sql注入&#x2F;xxe??)<br>然后注册后发现阔以上传文件(文件上传漏洞?)</p>
+<p>先试试文件上传漏洞:<br>上传成功，但是连8了…..</p>
+<p>再看看，别急着看wp….<br>试试在登陆界面用sql注入，以及在注册界面试试sql约束攻击<br>还没等试呢，然后在渗透中莫名其妙就出flag了…看了wp才知道，账号admin，密码就是123，在sql注入的时候误输输对了….</p>
+<h3 id="unicode欺骗"><a href="#unicode欺骗" class="headerlink" title="unicode欺骗"></a>unicode欺骗</h3><p>Unicode欺骗指的是域名中的ASCII字符被替换为Unicode集中的相似字符</p>
+<p>在这道题里，我们阔以注册1个ᴬᴰᴹᴵᴺ用户，然后后台的转化机制是这样的: ᴬᴰᴹᴵᴺ -&gt; ADMIN -&gt; admin<br>然后就阔以用自己的密码登录这个admin辣<br>类似sql约束攻击，网上还有这个漏洞的进阶版: unicode漏洞，看完感觉很流批</p>
+
             </div>
             <hr>
             <div>
