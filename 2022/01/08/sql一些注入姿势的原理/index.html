@@ -26,7 +26,7 @@
 <meta property="og:image" content="http://example.com/images/sql%E6%B3%A8%E5%85%A5(1).png">
 <meta property="og:image" content="http://example.com/images/sqli_labs/sqli_labs(5).png">
 <meta property="article:published_time" content="2022-01-08T03:33:06.000Z">
-<meta property="article:modified_time" content="2022-05-03T15:58:29.474Z">
+<meta property="article:modified_time" content="2022-05-21T11:44:11.899Z">
 <meta property="article:author" content="7bmk">
 <meta property="article:tag" content="web">
 <meta name="twitter:card" content="summary_large_image">
@@ -212,7 +212,7 @@
   
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      8.4k 字
+      8.5k 字
     </span>
   
 
@@ -221,7 +221,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      70 分钟
+      71 分钟
     </span>
   
 
@@ -273,7 +273,9 @@
 <h3 id="16进制-绕过被屏蔽的表名、列名、数据库名"><a href="#16进制-绕过被屏蔽的表名、列名、数据库名" class="headerlink" title="16进制: 绕过被屏蔽的表名、列名、数据库名"></a>16进制: 绕过被屏蔽的表名、列名、数据库名</h3><p>用16进制编码代替关键字，只可用来查询被屏蔽的表名等(8能绕过select)<br>比如’admin’的16进制:<br>0x61<br>0x64<br>0x6d<br>0x69<br>0x6e<br>于是:<br>select * from user where username &#x3D; 0x61646d696e;</p>
 <h2 id="关键字过滤代替表"><a href="#关键字过滤代替表" class="headerlink" title="关键字过滤代替表"></a>关键字过滤代替表</h2><p>空格: &#x2F;**&#x2F; %20 %a0 %0a +<br>and: &amp;&amp;<br>or: ||<br>limit: having<br>select: ⼀般是堆叠注⼊</p>
 <p>information_schema:<br>mysql.innodb_table_stats<br>innodb_index_stats<br>sys.schema_table_statistics_with_buffer<br>sys.schema_auto_increment_columns</p>
-<h3 id="handler代替select"><a href="#handler代替select" class="headerlink" title="handler代替select"></a>handler代替select</h3><p>handler是mysql专用的，</p>
+<h3 id="handler代替select"><a href="#handler代替select" class="headerlink" title="handler代替select"></a>handler代替select</h3><p>handler是mysql专用的</p>
+<h3 id="等于号-x3D-绕过"><a href="#等于号-x3D-绕过" class="headerlink" title="等于号&#x3D;绕过"></a>等于号&#x3D;绕过</h3><figure class="highlight axapta"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs axapta"><span class="hljs-keyword">where</span> table_schema=<span class="hljs-string">&#x27;geek&#x27;</span><br><span class="hljs-keyword">where</span> (table_schema) <span class="hljs-keyword">like</span> (<span class="hljs-string">&#x27;geek&#x27;</span>)<br></code></pre></td></tr></table></figure>
+
 <h1 id="常用查询语句"><a href="#常用查询语句" class="headerlink" title="常用查询语句"></a>常用查询语句</h1><p>最好记住，很常用了这，写这也就是做个备忘<br>group_concat(id,username,passowrd) from table1;<br>group_concat: 把column里的所有内容用,连成1个<br>database()<br>查询schema:<br>-1’ ununionion seleselectct 1,2,schema_name frofromm infoorrormation_schema.schemata;#    &#x2F;&#x2F;此处是information_schema.schemata<br>show databases;</p>
 <h1 id="双查询注入"><a href="#双查询注入" class="headerlink" title="双查询注入"></a>双查询注入</h1><h2 id="什么是双查询注入"><a href="#什么是双查询注入" class="headerlink" title="什么是双查询注入"></a>什么是双查询注入</h2><p>双查询注入，俺的理解大概就是就是select语句里再套1个select，比如: select concat((select database()));</p>
 <h2 id="双查询注入原理"><a href="#双查询注入原理" class="headerlink" title="双查询注入原理"></a>双查询注入原理</h2><p>就是利用报错来回显数据……没个10年搓代码功底谁能知道这个报错</p>
