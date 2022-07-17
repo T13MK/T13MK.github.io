@@ -16,16 +16,16 @@
   <meta name="author" content="7bmk">
   <meta name="keywords" content="">
   
-    <meta name="description" content="刷题记录，未来会总结成笔记 web[极客大挑战 2019]EasySQL考察最简单的万能密码: 1&#x2F;?name&#x3D;1&amp;#x27; or &amp;#x27;1&amp;#x27;&#x3D;1&amp;#x27;&amp;password&#x3D;1&amp;#x27; or &amp;#x27;1&amp;#x27;&#x3D;&amp;#x27;1 [强网杯 2019]随便注简单的有回显注入考察了堆叠注入，以及你8会的一些sql语法 然后禁止了一些关键词如select等，然后可">
+    <meta name="description" content="刷题记录，未来会总结成笔记 web[强网杯 2019]随便注(重命名&amp;预处理语句)简单的有回显注入考察了堆叠注入，以及你8会的一些sql语法 然后禁止了一些关键词如select等，然后可以通过一些方法猜出数据库长度、名称eg:  1and (length(database())&#x3D;8)--  然而事实上要更简单:  11&amp;#x27;;show databases;# 可以得到2个表: wor">
 <meta property="og:type" content="article">
 <meta property="og:title" content="刷题(0x00)">
 <meta property="og:url" content="http://example.com/2021/11/27/%E5%88%B7%E9%A2%98-0x00/index.html">
 <meta property="og:site_name">
-<meta property="og:description" content="刷题记录，未来会总结成笔记 web[极客大挑战 2019]EasySQL考察最简单的万能密码: 1&#x2F;?name&#x3D;1&amp;#x27; or &amp;#x27;1&amp;#x27;&#x3D;1&amp;#x27;&amp;password&#x3D;1&amp;#x27; or &amp;#x27;1&amp;#x27;&#x3D;&amp;#x27;1 [强网杯 2019]随便注简单的有回显注入考察了堆叠注入，以及你8会的一些sql语法 然后禁止了一些关键词如select等，然后可">
+<meta property="og:description" content="刷题记录，未来会总结成笔记 web[强网杯 2019]随便注(重命名&amp;预处理语句)简单的有回显注入考察了堆叠注入，以及你8会的一些sql语法 然后禁止了一些关键词如select等，然后可以通过一些方法猜出数据库长度、名称eg:  1and (length(database())&#x3D;8)--  然而事实上要更简单:  11&amp;#x27;;show databases;# 可以得到2个表: wor">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="http://example.com/img/%E6%A2%A6%E9%BE%99.png">
 <meta property="article:published_time" content="2021-11-27T05:45:27.000Z">
-<meta property="article:modified_time" content="2022-07-06T01:12:02.476Z">
+<meta property="article:modified_time" content="2022-07-16T08:42:06.618Z">
 <meta property="article:author" content="7bmk">
 <meta property="article:tag" content="web">
 <meta property="article:tag" content="pwn">
@@ -212,7 +212,7 @@
   
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      8.6k 字
+      8.4k 字
     </span>
   
 
@@ -221,7 +221,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      72 分钟
+      71 分钟
     </span>
   
 
@@ -254,11 +254,9 @@
             
             <div class="markdown-body">
               <p>刷题记录，未来会总结成笔记</p>
-<h1 id="web"><a href="#web" class="headerlink" title="web"></a>web</h1><h2 id="极客大挑战-2019-EasySQL"><a href="#极客大挑战-2019-EasySQL" class="headerlink" title="[极客大挑战 2019]EasySQL"></a>[极客大挑战 2019]EasySQL</h2><p>考察最简单的万能密码:</p>
-<figure class="highlight pgsql"><table><tr><td class="gutter"><div class="code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><pre><code class="hljs pgsql">/?<span class="hljs-type">name</span>=<span class="hljs-number">1</span><span class="hljs-string">&#x27; or &#x27;</span><span class="hljs-number">1</span><span class="hljs-string">&#x27;=1&#x27;</span>&amp;<span class="hljs-keyword">password</span>=<span class="hljs-number">1</span><span class="hljs-string">&#x27; or &#x27;</span><span class="hljs-number">1</span><span class="hljs-string">&#x27;=&#x27;</span><span class="hljs-number">1</span><br></code></pre></td></tr></table></figure>
-<h2 id="强网杯-2019-随便注"><a href="#强网杯-2019-随便注" class="headerlink" title="[强网杯 2019]随便注"></a>[强网杯 2019]随便注</h2><p>简单的有回显注入<br>考察了堆叠注入，以及你8会的一些sql语法</p>
+<h1 id="web"><a href="#web" class="headerlink" title="web"></a>web</h1><h2 id="强网杯-2019-随便注-重命名-amp-预处理语句"><a href="#强网杯-2019-随便注-重命名-amp-预处理语句" class="headerlink" title="[强网杯 2019]随便注(重命名&amp;预处理语句)"></a>[强网杯 2019]随便注(重命名&amp;预处理语句)</h2><p>简单的有回显注入<br>考察了堆叠注入，以及你8会的一些sql语法</p>
 <p>然后禁止了一些关键词如select等，然后可以通过一些方法猜出数据库长度、名称<br>eg: </p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">and</span> (length(database())<span class="hljs-operator">=</span><span class="hljs-number">8</span>)<span class="hljs-comment">-- </span><br></code></pre></td></tr></table></figure>
+<figure class="highlight sql"><table><tr><td class="gutter"><div class="code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">and</span> (length(database())<span class="hljs-operator">=</span><span class="hljs-number">8</span>)<span class="hljs-comment">-- </span><br></code></pre></td></tr></table></figure>
 <p>然而事实上要更简单: </p>
 <figure class="highlight gauss"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs gauss"><span class="hljs-number">1</span>&#x27;;<span class="hljs-keyword">show</span> databases;<span class="hljs-meta">#</span><br></code></pre></td></tr></table></figure>
 <p>可以得到2个表: words和1919810931114514</p>
@@ -296,8 +294,7 @@
 <h3 id="zip-x2F-x2F"><a href="#zip-x2F-x2F" class="headerlink" title="zip:&#x2F;&#x2F;"></a>zip:&#x2F;&#x2F;</h3><h2 id="bugku-bp-爆密码有时结合源码，8一定length"><a href="#bugku-bp-爆密码有时结合源码，8一定length" class="headerlink" title="bugku-bp (爆密码有时结合源码，8一定length)"></a>bugku-bp (爆密码有时结合源码，8一定length)</h2><p>一开始以为是简单的爆密码，然后发现爆不出来，返回的长度都一样</p>
 <p>然后看wp，明白了有可能是无论密码正确或错误，它返回响应的长度都是一样的<br>那么就可能是根据js代码来回显信息的，然后查看返回包返回的js代码，果然有问题，返回wrong password的代码里</p>
 <p>这里就要通过bugku的Grep_Match来过滤掉js代码里存在{code: ‘bugku10000’}的包:<br>intruder-&gt;options-&gt;Grep_Match-&gt;add-&gt;{code: ‘bugku10000’}</p>
-<h2 id="xctf-php2"><a href="#xctf-php2" class="headerlink" title="xctf php2"></a>xctf php2</h2><p>tips: 某些情况用户可通过.phps后缀查看php源码</p>
-<h2 id="xctf-Web-php-includ"><a href="#xctf-Web-php-includ" class="headerlink" title="xctf Web_php_includ"></a>xctf Web_php_includ</h2><p>一进去，php源码贴脸</p>
+<h2 id="xctf-Web-php-include"><a href="#xctf-Web-php-include" class="headerlink" title="xctf Web_php_include"></a>xctf Web_php_include</h2><p>一进去，php源码贴脸</p>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs php"><span class="hljs-meta">&lt;?php</span><br>show_source(<span class="hljs-keyword">__FILE__</span>);<br><span class="hljs-keyword">echo</span> <span class="hljs-variable">$_GET</span>[<span class="hljs-string">&#x27;hello&#x27;</span>];<br><span class="hljs-variable">$page</span>=<span class="hljs-variable">$_GET</span>[<span class="hljs-string">&#x27;page&#x27;</span>];<br><span class="hljs-keyword">while</span> (strstr(<span class="hljs-variable">$page</span>, <span class="hljs-string">&quot;php://&quot;</span>)) &#123;<br>    <span class="hljs-variable">$page</span>=str_replace(<span class="hljs-string">&quot;php://&quot;</span>, <span class="hljs-string">&quot;&quot;</span>, <span class="hljs-variable">$page</span>);<br>&#125;<br><span class="hljs-keyword">include</span>(<span class="hljs-variable">$page</span>);<br><span class="hljs-meta">?&gt;</span><br></code></pre></td></tr></table></figure>
 
 <p>然后扫了扫目录，发现又phpmyadmin文件，进去后是个登录页面<br><img src="/images/%E5%88%B7%E9%A2%98/xctf(2).png" srcset="/img/loading.gif" lazyload></p>
